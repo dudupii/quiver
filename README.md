@@ -32,7 +32,7 @@ A lightweight alternative to `superpowers:brainstorming`: no heavyweight process
 ### Usage
 
 ```
-我想给日志系统加个告警规则引擎          ← auto-triggers
+I want to add an alert rule engine to our logging system ← auto-triggers
 give me 2-3 options for the cache layer ← forces the divergent phase
 brainstorm this: OAuth login for the CLI ← explicit
 ```
