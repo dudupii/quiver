@@ -17,11 +17,10 @@ More arrows coming.
 
 ```bash
 claude plugin marketplace add dudupii/quiver
-claude plugin install brainstorm@quiver
-claude plugin install handover@quiver
+claude plugin install quiver@quiver
 ```
 
-Install only the arrows you need — each is an independent plugin.
+All arrows install together, namespaced under `/quiver:` — and bare names work too (`/brainstorm`, `/handover`).
 
 ## Arrow: handover
 
@@ -31,7 +30,7 @@ A session-end handover note that a human (or the next session) can pick up.
 - **Reference, don't duplicate**: content already captured in specs, plans, ADRs, issues, commits, diffs or earlier handovers is linked by path, never copied
 - **Suggested skills**: names which skills the next session should invoke, and for what
 - **Redaction**: no API keys, tokens, passwords or personal data in the note
-- **Language**: `/handover` (default `en`), `/handover ja`, `/handover zh`. Your choice is remembered per project in `.claude/handovers/.lang` and becomes the default for the next run
+- **Language**: `/quiver:handover` (default `en`), `/quiver:handover ja`, `/quiver:handover zh` — bare `/handover` works too. Your choice is remembered per project in `.claude/handovers/.lang` and becomes the default for the next run
 - Notes land in `.claude/handovers/YYYY-MM-DD_HHmm.md` (name collisions get `_2`, `_3`, …)
 
 ## Arrow: brainstorm

@@ -17,11 +17,10 @@
 
 ```bash
 claude plugin marketplace add dudupii/quiver
-claude plugin install brainstorm@quiver
-claude plugin install handover@quiver
+claude plugin install quiver@quiver
 ```
 
-每支箭都是独立插件，按需安装。
+所有箭一起安装，统一挂在 `/quiver:` 命名空间下——裸名 `/brainstorm`、`/handover` 也能用。
 
 ## 箭支详解：handover
 
@@ -31,7 +30,7 @@ claude plugin install handover@quiver
 - **只引用不重复**：已落在 spec/plan/ADR/issue/commit/diff/早期交接里的内容，一律引用路径，绝不复述
 - **建议技能**节：点名下个会话该调哪些 skill、用来做什么
 - **脱敏**：笔记中不出现 API key、token、密码、个人数据
-- **语言**：`/handover`（默认英文）、`/handover ja`、`/handover zh`。你的选择按项目记忆在 `.claude/handovers/.lang`，下次自动沿用
+- **语言**：`/quiver:handover`（默认英文）、`/quiver:handover ja`、`/quiver:handover zh`——裸名 `/handover` 也可。你的选择按项目记忆在 `.claude/handovers/.lang`，下次自动沿用
 - 笔记落在 `.claude/handovers/YYYY-MM-DD_HHmm.md`（重名加 `_2`、`_3`…）
 
 ## 箭支详解：brainstorm

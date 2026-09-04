@@ -1,9 +1,0 @@
-{
-  "name": "handover",
-  "description": "Multilingual session handover notes: what was done, decisions, discarded options and why, gotchas, learnings, next steps, suggested skills. Remembers your last language.",
-  "version": "0.1.0",
-  "author": {
-    "name": "dudupii",
-    "url": "https://github.com/dudupii"
-  }
-}

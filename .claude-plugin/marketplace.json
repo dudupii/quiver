@@ -7,14 +7,9 @@
   },
   "plugins": [
     {
-      "name": "brainstorm",
-      "source": "./plugins/brainstorm",
-      "description": "Design-first brainstorming: divergent options for direction-level decisions, convergent grilling for details, gated by the user."
-    },
-    {
-      "name": "handover",
-      "source": "./plugins/handover",
-      "description": "Multilingual session handover notes (en/ja/zh) with language memory: decisions, discarded options, gotchas, next steps, suggested skills."
+      "name": "quiver",
+      "source": "./",
+      "description": "Design-first brainstorming (divergent options + convergent grilling) and multilingual session handovers (en/ja/zh with language memory). Skills: /quiver:brainstorm, /quiver:handover."
     }
   ]
 }
