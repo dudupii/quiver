@@ -21,6 +21,7 @@ When the language came from an argument, persist it to `.claude/handovers/.lang`
 
 - **Reference, don't duplicate**: never copy content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs, earlier handovers). Link by path instead.
 - **Redact secrets**: no API keys, tokens, passwords, or personal data in the note.
+- **Read-only git**: never run a state-changing git command (`add`, `commit`, `push`, `checkout`, …) and never edit `.gitignore` — git's only role in this skill is read-only lookup.
 - Facts only, bullets over prose, no speculation.
 - The **Discarded options** section is the most valuable one: it stops the next session from re-litigating settled questions.
 
@@ -53,6 +54,7 @@ Metadata rules:
 3. Ensure `.claude/handovers/` exists.
 4. Write the note — frontmatter block, then every section — to `.claude/handovers/YYYY-MM-DD_HHmm.md` (e.g. `2026-02-17_1430.md`). On name collision append `_2`, `_3`, …
 5. Persist the resolved language if it was set by argument.
+6. Sharing check (read-only): if `git ls-files .claude/handovers/` lists tracked notes and the new note is not gitignored (`git check-ignore -q <note>` exits non-zero), close with a single line in the resolved language suggesting to commit the note so teammates can see it. If the directory is gitignored or untracked, or this is not a git repository, say nothing about git.
 
 ## Sections
 
