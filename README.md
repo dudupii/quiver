@@ -9,6 +9,7 @@ A growing quiver of [Claude Code](https://claude.com/claude-code) skills. Small,
 | Skill | What it does |
 |---|---|
 | **brainstorm** | Turns a rough idea into an agreed design *before* any implementation. Auto-triggers at the start of creative work. |
+| **handover** | Multilingual session handover notes (en / ja / zh) with language memory — decisions, discarded options, gotchas, next steps, suggested skills. |
 
 More arrows coming.
 
@@ -17,7 +18,21 @@ More arrows coming.
 ```bash
 claude plugin marketplace add dudupii/quiver
 claude plugin install brainstorm@quiver
+claude plugin install handover@quiver
 ```
+
+Install only the arrows you need — each is an independent plugin.
+
+## Arrow: handover
+
+A session-end handover note that a human (or the next session) can pick up.
+
+- **8 fixed sections**, most importantly *Discarded options and why* — it stops the next session from re-litigating settled questions
+- **Reference, don't duplicate**: content already captured in specs, plans, ADRs, issues, commits, diffs or earlier handovers is linked by path, never copied
+- **Suggested skills**: names which skills the next session should invoke, and for what
+- **Redaction**: no API keys, tokens, passwords or personal data in the note
+- **Language**: `/handover` (default `en`), `/handover ja`, `/handover zh`. Your choice is remembered per project in `.claude/handovers/.lang` and becomes the default for the next run
+- Notes land in `.claude/handovers/YYYY-MM-DD_HHmm.md` (name collisions get `_2`, `_3`, …)
 
 ## Arrow: brainstorm
 

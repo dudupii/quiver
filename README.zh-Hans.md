@@ -9,6 +9,7 @@
 | 技能 | 作用 |
 |---|---|
 | **brainstorm** | 在任何实现开始**之前**，把模糊想法自动对齐成共识设计。创造性工作开始时自动触发。 |
+| **handover** | 多语言会话交接笔记（英/日/中），带语言记忆——决策、放弃的选项与理由、踩坑、下一步、建议技能。 |
 
 更多箭支在路上。
 
@@ -17,7 +18,21 @@
 ```bash
 claude plugin marketplace add dudupii/quiver
 claude plugin install brainstorm@quiver
+claude plugin install handover@quiver
 ```
+
+每支箭都是独立插件，按需安装。
+
+## 箭支详解：handover
+
+会话收尾时生成的交接笔记，给人（或下个会话）接手用。
+
+- **8 个固定小节**，最重要的是"放弃的选项与理由"——防止下个会话重新讨论已定案的问题
+- **只引用不重复**：已落在 spec/plan/ADR/issue/commit/diff/早期交接里的内容，一律引用路径，绝不复述
+- **建议技能**节：点名下个会话该调哪些 skill、用来做什么
+- **脱敏**：笔记中不出现 API key、token、密码、个人数据
+- **语言**：`/handover`（默认英文）、`/handover ja`、`/handover zh`。你的选择按项目记忆在 `.claude/handovers/.lang`，下次自动沿用
+- 笔记落在 `.claude/handovers/YYYY-MM-DD_HHmm.md`（重名加 `_2`、`_3`…）
 
 ## 箭支详解：brainstorm
 

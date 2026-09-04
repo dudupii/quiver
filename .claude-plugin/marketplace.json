@@ -1,6 +1,6 @@
 {
   "name": "quiver",
-  "description": "One arrow, one skill. A growing quiver of Claude Code skills — starting with brainstorm, auto-triggered design alignment before implementation.",
+  "description": "One arrow, one skill. A growing quiver of Claude Code skills — brainstorm for design alignment, handover for multilingual session notes.",
   "owner": {
     "name": "dudupii",
     "url": "https://github.com/dudupii"
@@ -8,8 +8,13 @@
   "plugins": [
     {
       "name": "brainstorm",
-      "source": "./",
+      "source": "./plugins/brainstorm",
       "description": "Design-first brainstorming: divergent options for direction-level decisions, convergent grilling for details, gated by the user."
+    },
+    {
+      "name": "handover",
+      "source": "./plugins/handover",
+      "description": "Multilingual session handover notes (en/ja/zh) with language memory: decisions, discarded options, gotchas, next steps, suggested skills."
     }
   ]
 }
