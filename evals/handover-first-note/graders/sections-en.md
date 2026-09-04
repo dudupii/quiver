@@ -3,7 +3,8 @@ type: regex
 target: "{source: file, path: .claude/handovers/*.md}"
 match: contains
 flags: m
-pattern: "^## .*(What was done|Decisions|Discarded options and why|Gotchas)"
+pattern: "(?=[\\s\\S]*^## .*What was done)(?=[\\s\\S]*^## .*Decisions)(?=[\\s\\S]*^## .*Discarded options and why)(?=[\\s\\S]*^## .*Gotchas)"
 ---
 
-The eight-section structure is unchanged by the missing metadata.
+All four checked section headers must appear (lookahead-AND, not any-one-of);
+the remaining four are judged by the quality grader.
