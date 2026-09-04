@@ -17,7 +17,7 @@ Read the latest handover notes and brief the incoming session, in-conversation. 
 
 ## Git delta
 
-If the newest note's frontmatter carries a `commit`, read `git log <commit>..HEAD --oneline` and fold those commits into Current state as what happened since the last handover, citing shas. No `commit` field, not a git repo, or an empty range — say nothing about git delta; never invent commits.
+If the newest note's frontmatter carries a `commit`, read `git log <commit>..HEAD --oneline` and fold those commits into Current state as what happened since the last handover, citing shas. No `commit` field, not a git repo, an empty range, or a commit git cannot resolve — say nothing about git delta; never invent commits.
 
 ## Language resolution
 

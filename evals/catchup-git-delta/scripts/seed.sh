@@ -58,9 +58,10 @@ none
 EOF
 
 # Commits AFTER the newest note: the delta the brief must include.
+# Only src/ is added — the note itself stays untracked, as handover leaves it.
 printf 'cache: on\n' > src/cache.conf
-git add -A
+git add src
 git commit -qm "DELTA-MARKER-ONE add cache toggle to config"
 printf 'v2\n' > src/worker.py
-git add -A
+git add src
 git commit -qm "DELTA-MARKER-TWO rewrite worker loop"
