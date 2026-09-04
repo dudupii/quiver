@@ -1,0 +1,15 @@
+{
+  "name": "claude-brainstorm",
+  "description": "Marketplace for claude-brainstorm: auto-triggered design alignment before implementation (divergent options + convergent grilling), a lightweight superpowers:brainstorming alternative.",
+  "owner": {
+    "name": "dudupii",
+    "url": "https://github.com/dudupii"
+  },
+  "plugins": [
+    {
+      "name": "brainstorm",
+      "source": "./",
+      "description": "Design-first brainstorming: divergent options for direction-level decisions, convergent grilling for details, gated by the user."
+    }
+  ]
+}
