@@ -15,6 +15,10 @@ Read the latest handover notes and brief the incoming session, in-conversation. 
 3. Notes without frontmatter (legacy format) are read like any other.
 4. If the directory is missing or has no notes, say so briefly in the resolved language and stop. Never invent content.
 
+## Git delta
+
+If the newest note's frontmatter carries a `commit`, read `git log <commit>..HEAD --oneline` and fold those commits into Current state as what happened since the last handover, citing shas. No `commit` field, not a git repo, or an empty range — say nothing about git delta; never invent commits.
+
 ## Language resolution
 
 1. An explicit language request in the conversation wins.
