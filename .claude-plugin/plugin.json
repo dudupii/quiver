@@ -2,6 +2,9 @@
   "name": "quiver",
   "description": "One arrow, one skill. Design-first brainstorming + multilingual session handovers.",
   "version": "0.2.0",
+  "experimental": {
+    "evals": "evals"
+  },
   "author": {
     "name": "dudupii",
     "url": "https://github.com/dudupii"

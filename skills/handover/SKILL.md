@@ -24,12 +24,35 @@ When the language came from an argument, persist it to `.claude/handovers/.lang`
 - Facts only, bullets over prose, no speculation.
 - The **Discarded options** section is the most valuable one: it stops the next session from re-litigating settled questions.
 
+## Note format
+
+The note file starts with a YAML frontmatter block, then the eight sections:
+
+```yaml
+---
+author: dupi          # git config user.name — never the email
+branch: main          # current branch
+commit: 71b50e8       # short HEAD sha
+lang: zh              # language this note is written in
+continues: 2026-02-17_1430.md   # most recent existing note at write time
+---
+```
+
+Metadata rules:
+
+- `author`, `branch`, `commit` are collected with read-only git commands. When a lookup fails or comes back empty (for example in a non-git directory), silently omit that field — never error, never substitute a guess.
+- **No email**: never read or write `git config user.email`; `author` is `user.name` only.
+- `lang` is always present.
+- `continues` names the most recent existing `*.md` note in `.claude/handovers/` by filename order at write time; the `.lang` memory file is not a note. Omit it when there is no prior note.
+- Notes without frontmatter (written before this convention) are still valid `continues` targets.
+
 ## Process
 
 1. Review what this session did.
-2. Ensure `.claude/handovers/` exists.
-3. Write the note to `.claude/handovers/YYYY-MM-DD_HHmm.md` (e.g. `2026-02-17_1430.md`). On name collision append `_2`, `_3`, …
-4. Persist the resolved language if it was set by argument.
+2. Collect note metadata with read-only lookups: `git config user.name`, `git branch --show-current`, `git rev-parse --short HEAD`, and the latest existing note filename (omit fields whose lookup fails).
+3. Ensure `.claude/handovers/` exists.
+4. Write the note — frontmatter block, then every section — to `.claude/handovers/YYYY-MM-DD_HHmm.md` (e.g. `2026-02-17_1430.md`). On name collision append `_2`, `_3`, …
+5. Persist the resolved language if it was set by argument.
 
 ## Sections
 
