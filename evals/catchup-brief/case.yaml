@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: catchup-brief
+context:
+  scaffold_script: scripts/seed.sh
