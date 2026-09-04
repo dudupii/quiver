@@ -1,25 +1,35 @@
-# claude-brainstorm
+# quiver
 
-A Claude Code skill plugin that turns a rough idea into an agreed design **before** any implementation — automatically.
+One arrow, one skill. 🏹
 
-It is a lightweight alternative to `superpowers:brainstorming`: no heavyweight process framework, no session-start hooks, no forced workflow on every task. Just one entry skill and one interview engine, ~2KB of instructions total.
+A growing quiver of [Claude Code](https://claude.com/claude-code) skills. Small, sharp, and independent — grab only what you need.
 
-## How it works
+## Arrows
+
+| Skill | What it does |
+|---|---|
+| **brainstorm** | Turns a rough idea into an agreed design *before* any implementation. Auto-triggers at the start of creative work. |
+
+More arrows coming.
+
+## Install
+
+```bash
+claude plugin marketplace add dudupii/quiver
+claude plugin install brainstorm@quiver
+```
+
+## Arrow: brainstorm
+
+A lightweight alternative to `superpowers:brainstorming`: no heavyweight process framework, no session-start hooks, no forced workflow on every task. One entry skill and one interview engine, ~2KB of instructions total.
+
+### How it works
 
 1. **Divergent phase** *(when warranted)* — for direction-level decisions (new subsystem, external dependency choice, data model change, sync vs async), or when you ask for options, it first presents 2–3 whole-design approaches with trade-offs and a recommendation, then **waits for you to pick**.
 2. **Convergent phase** — it then runs [grilling](https://github.com/mattpocock/skills) (bundled, MIT): a design-tree interview that asks questions in dependency order, one batched round at a time, each question with a recommended answer. It never asks you anything it could look up itself.
 3. **Gate** — when alignment is complete you get a design summary (alternatives considered, chosen options and why, standing assumptions). **Nothing gets implemented until you say so.**
 
-## Install
-
-```bash
-claude plugin marketplace add dudupii/claude-brainstorm
-claude plugin install brainstorm@claude-brainstorm
-```
-
-## Usage
-
-Just start describing feature work — it triggers automatically at the start of creative work:
+### Usage
 
 ```
 我想给日志系统加个告警规则引擎          ← auto-triggers
@@ -29,9 +39,9 @@ brainstorm this: OAuth login for the CLI ← explicit
 
 If you also use the [mattpocock skills](https://github.com/mattpocock/skills), the natural follow-ups are `/to-spec` → `/to-tickets` → `/implement`; the skill will suggest them when available.
 
-## Why not just use superpowers:brainstorming?
+### Why not just use superpowers:brainstorming?
 
-| | superpowers:brainstorming | claude-brainstorm |
+| | superpowers:brainstorming | quiver/brainstorm |
 |---|---|---|
 | Trigger | forced before EVERY creative task | automatic but selective; divergent only for direction-level work |
 | Interview | one question at a time | design-tree rounds, dependency-ordered, batched, each with a recommendation |
@@ -41,5 +51,5 @@ If you also use the [mattpocock skills](https://github.com/mattpocock/skills), t
 
 ## Credits & License
 
-- The `grilling` engine is bundled verbatim from [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock — MIT, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- The `grilling` engine bundled under `skills/grilling/` is from [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock — MIT, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - Everything else: MIT © 2026 dudupii — see [LICENSE](LICENSE).

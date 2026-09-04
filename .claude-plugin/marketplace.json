@@ -1,6 +1,6 @@
 {
-  "name": "claude-brainstorm",
-  "description": "Marketplace for claude-brainstorm: auto-triggered design alignment before implementation (divergent options + convergent grilling), a lightweight superpowers:brainstorming alternative.",
+  "name": "quiver",
+  "description": "One arrow, one skill. A growing quiver of Claude Code skills — starting with brainstorm, auto-triggered design alignment before implementation.",
   "owner": {
     "name": "dudupii",
     "url": "https://github.com/dudupii"
