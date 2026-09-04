@@ -13,14 +13,14 @@ Generate a handover note for this session's work, in the resolved language.
 
 1. If the user passed `en`, `ja`, or `zh` as the argument, use it.
 2. Otherwise read `.claude/handovers/.lang` (project-level memory); if it exists, use the stored language.
-3. Otherwise default to `en`.
+3. Otherwise infer the language from the user's messages in this session; when they are mixed or unclear, fall back to `en`.
 
 When the language came from an argument, persist it to `.claude/handovers/.lang` (creating the directory if needed) so the next run defaults to it. Write the entire note — including section headers — in the resolved language.
 
 ## Rules
 
 - **Reference, don't duplicate**: never copy content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs, earlier handovers). Link by path instead.
-- **Redact secrets**: no API keys, tokens, passwords, or personal data in the note.
+- **Redact secrets**: no API keys, tokens, passwords, or personal data in the note. Before writing, scan the draft for credential patterns — `sk-…`, `ghp_…`/`gho_…`, `AKIA…`, `xox[bap]-…`, `-----BEGIN … PRIVATE KEY-----`, `password: …` — and rewrite any hit: keep the fact, drop the value.
 - **Read-only git**: never run a state-changing git command (`add`, `commit`, `push`, `checkout`, …) and never edit `.gitignore` — git's only role in this skill is read-only lookup.
 - Facts only, bullets over prose, no speculation.
 - The **Discarded options** section is the most valuable one: it stops the next session from re-litigating settled questions.
