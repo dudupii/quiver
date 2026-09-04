@@ -1,7 +1,7 @@
 {
   "name": "quiver",
-  "description": "One arrow, one skill. Design-first brainstorming + multilingual session handovers.",
-  "version": "0.2.0",
+  "description": "One arrow, one skill. Design-first brainstorming + multilingual session handovers + catch-up briefs.",
+  "version": "0.3.0",
   "experimental": {
     "evals": "evals"
   },

@@ -1,6 +1,6 @@
 {
   "name": "quiver",
-  "description": "One arrow, one skill. A growing quiver of Claude Code skills — brainstorm for design alignment, handover for multilingual session notes.",
+  "description": "One arrow, one skill. A growing quiver of Claude Code skills — brainstorm for design alignment, handover for multilingual session notes, catchup for reading them back.",
   "owner": {
     "name": "dudupii",
     "url": "https://github.com/dudupii"
@@ -9,7 +9,7 @@
     {
       "name": "quiver",
       "source": "./",
-      "description": "Design-first brainstorming (divergent options + convergent grilling) and multilingual session handovers (en/ja/zh with language memory). Skills: /quiver:brainstorm, /quiver:handover."
+      "description": "Design-first brainstorming (divergent options + convergent grilling), multilingual session handovers (en/ja/zh with language memory), and read-only catch-up briefs over the latest notes plus the git delta since them. Skills: /quiver:brainstorm, /quiver:handover, /quiver:catchup."
     }
   ]
 }
