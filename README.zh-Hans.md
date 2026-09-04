@@ -23,6 +23,14 @@ claude plugin install quiver@quiver
 
 所有箭一起安装，统一挂在 `/quiver:` 命名空间下——裸名 `/brainstorm`、`/handover` 也能用。
 
+## 更新
+
+```bash
+claude plugin update quiver
+```
+
+**重启会话后生效。**若版本号看起来没变，先刷新 marketplace（`claude plugin marketplace update quiver`）再更新一次。
+
 ## 箭支详解：handover
 
 会话收尾时生成的交接笔记，给人（或下个会话）接手用。

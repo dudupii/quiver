@@ -23,6 +23,14 @@ claude plugin install quiver@quiver
 
 All arrows install together, namespaced under `/quiver:` — and bare names work too (`/brainstorm`, `/handover`).
 
+## Update
+
+```bash
+claude plugin update quiver
+```
+
+**Restart the session to apply.** If the version looks stale, refresh the marketplace first (`claude plugin marketplace update quiver`), then update again.
+
 ## Arrow: handover
 
 A session-end handover note that a human (or the next session) can pick up.
