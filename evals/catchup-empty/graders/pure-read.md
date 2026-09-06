@@ -2,9 +2,9 @@
 type: regex
 target: files
 match: count:0
-pattern: "\\.claude/"
+pattern: "handovers/"
 ---
 
-Nothing under `.claude/` is created — the missing handover directory is not
-silently materialized, no `.lang` memory is written. Assumes the `files`
+Neither handover directory (`.handovers/` nor legacy `.claude/handovers/`)
+is silently materialized, no `.lang` memory is written. Assumes the `files`
 target lists files the run created.

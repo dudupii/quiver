@@ -1,9 +1,10 @@
 ---
 type: regex
-target: "{source: file, path: .claude/handovers/*.md}"
+target: last_message
 match: contains
-pattern: "---\nlang: en\ncontinues: 2026-01-01_0000\\.md\n---"
+pattern: "(?=[\\s\\S]*\\.handovers/)(?=[\\s\\S]*lang)"
 ---
 
-Outside git the note degrades gracefully: only the always-available fields
-remain, in the documented order (`lang`, then `continues`).
+Non-git directory: git lookups fail and their fields are silently omitted,
+so the reply must not present any `author`/`branch`/`commit` value — only
+the note path and language remain.

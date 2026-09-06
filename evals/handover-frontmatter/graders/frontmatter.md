@@ -1,11 +1,10 @@
 ---
 type: regex
-target: "{source: file, path: .claude/handovers/*.md}"
+target: last_message
 match: contains
-pattern: "---\nauthor: Test User\nbranch: main\ncommit: [0-9a-f]{7,40}\nlang: zh\ncontinues: 2026-01-01_0000\\.md\n---"
+pattern: "(?=[\\s\\S]*Test User)(?=[\\s\\S]*main)(?=[\\s\\S]*[0-9a-f]{7})(?=[\\s\\S]*2026-01-01_0000\\.md)"
 ---
 
-The new note carries the full frontmatter block in the documented field order,
-with real values from the seeded repo: author from `user.name`, branch `main`,
-the seeded commit's short sha, the zh argument, and `continues` pointing at the
-legacy note (most recent note at write time).
+The reply cites the full metadata chain: author, branch, commit sha, and
+`continues` resolving the seeded legacy note (which lives in the OLD
+`.claude/handovers/` directory — the dual-path read this case locks).

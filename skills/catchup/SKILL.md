@@ -10,10 +10,10 @@ Read the latest handover notes and brief the incoming session, in-conversation. 
 
 ## Reading the notes
 
-1. List `*.md` files in `.claude/handovers/` and sort by filename; `.lang` is not a note.
+1. List `*.md` files in `.handovers/` and in legacy `.claude/handovers/` (pre-0.4.0), merge the lists, and sort by filename; on a filename tie the `.handovers/` copy wins; `.lang` files are not notes.
 2. Read the latest N notes — default 3; a numeric argument widens the window (`/catchup 5`).
 3. Notes without frontmatter (legacy format) are read like any other.
-4. If the directory is missing or has no notes, say so briefly in the resolved language and stop. Never invent content.
+4. If neither directory exists or there are no notes, say so briefly in the resolved language and stop. Never invent content.
 
 ## Git delta
 
@@ -22,7 +22,7 @@ If the newest note's frontmatter carries a `commit`, read `git log <commit>..HEA
 ## Language resolution
 
 1. An explicit language request in the conversation wins.
-2. Otherwise read `.claude/handovers/.lang` if it exists.
+2. Otherwise read `.handovers/.lang`, then legacy `.claude/handovers/.lang`; use the first that exists.
 3. Otherwise infer from the user's messages.
 4. Otherwise English.
 
@@ -30,7 +30,7 @@ Never persist the language — handover is the sole writer of `.lang`.
 
 ## Read-only
 
-No file writes of any kind, no git state changes, nothing persisted. After a run the handover directory (including `.lang`) is byte-identical.
+No file writes of any kind, no git state changes, nothing persisted. After a run both handover directories (including every `.lang`) are byte-identical.
 
 ## The brief
 

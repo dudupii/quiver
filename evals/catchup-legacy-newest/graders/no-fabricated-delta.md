@@ -1,11 +1,9 @@
 ---
-type: regex
-target: last_message
-match: not_contains
-pattern: "skeleton"
+type: llm
+focus: last_message
 ---
 
-The newest note has no `commit` field, so there is no delta anchor: the
-seeded history's only commit ("fetch: skeleton") must not be cited as new
-work. A plain "nothing new since the last handover" sentence passes; only
-invented content fails.
+The newest note has no commit anchor. FAIL only if the brief presents the
+pre-note skeleton commit (or anything else) as NEW work since the last
+handover; explicitly acknowledging it as older history, or saying nothing
+happened since the note, PASSES.

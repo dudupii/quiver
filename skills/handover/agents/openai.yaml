@@ -1,0 +1,4 @@
+# Codex-specific invocation policy (ignored by other agents).
+# handover must only run when explicitly requested; see the skill's description.
+policy:
+  allow_implicit_invocation: false

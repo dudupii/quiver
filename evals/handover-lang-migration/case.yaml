@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: handover-lang-migration
+context:
+  scaffold_script: scripts/seed.sh

@@ -1,10 +1,10 @@
 ---
-type: regex
-target: last_message
-match: contains
-pattern: "(?=[\\s\\S]*DELTA-MARKER-ONE)(?=[\\s\\S]*DELTA-MARKER-TWO)"
+type: llm
+focus: last_message
 ---
 
-Both post-handover commits reach the brief (lookahead-AND): the newest note's
-recorded `commit`..HEAD range is exactly the two DELTA-MARKER commits, and
-"what happened since the last handover" must include both.
+Two commits landed after the newest note's recorded commit (a cache-toggle
+commit and a worker-module change). PASS if the brief surfaces BOTH as
+what happened since the last handover — shas, subjects, or paraphrase all
+count; citing the count "two commits" plus at least a phrase per commit
+PASSES. FAIL if either change is missing or the brief reports no delta.

@@ -7,14 +7,14 @@ git init -q -b main
 git config user.name "Test User"
 git config user.email "test@example.com"
 
-mkdir -p src .claude/handovers
+mkdir -p src .handovers
 echo "def order(): pass" > src/order.py
-printf '.claude/handovers/\n' > .gitignore
+printf '.handovers/\n' > .gitignore
 git add -A
 git commit -qm "order: skeleton, handovers dir ignored"
 
 # Written after the commit, so it is ignored and untracked.
-cat > .claude/handovers/2026-01-01_0000.md <<'EOF'
+cat > .handovers/2026-01-01_0000.md <<'EOF'
 # Handover 2026-01-01
 
 ## What was done

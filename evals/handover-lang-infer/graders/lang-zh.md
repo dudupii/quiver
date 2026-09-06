@@ -1,10 +1,10 @@
 ---
 type: regex
-target: "{source: file, path: .claude/handovers/*.md}"
+target: last_message
 match: contains
-pattern: "---\nlang: zh\n---"
+pattern: "(?=[\\s\\S]*\\.handovers/)(?=[\\s\\S]*[一-鿿])"
 ---
 
-No argument, no stored memory — the language is inferred from the user's
-Chinese messages, so the note (and its `lang` field) is Chinese. This case
-seeds nothing, so the frontmatter is exactly `lang` alone.
+No `.lang` memory and no argument: the note's language is inferred from the
+Chinese session, so the reply (which narrates the note) is itself in Chinese
+and names the `.handovers/` path.

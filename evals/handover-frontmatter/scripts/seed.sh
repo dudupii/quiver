@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# Seed a small git project with one prior (legacy, pre-frontmatter) handover note.
+# Seed a small git project with one prior handover note left in the LEGACY
+# .claude/handovers/ directory (a pre-0.4.0 user at upgrade time). The new note
+# must land in .handovers/ while `continues` still resolves the legacy note —
+# this case locks the read-old/write-new behavior.
 set -euo pipefail
 
 git init -q -b main

@@ -8,13 +8,13 @@ git init -q -b main
 git config user.name "Test User"
 git config user.email "test@example.com"
 
-mkdir -p src .claude/handovers
+mkdir -p src .handovers
 echo "def fetch(): pass" > src/fetch.py
 git add src
 git commit -qm "fetch: skeleton"
 
 # Legacy note: written before the frontmatter convention existed.
-cat > .claude/handovers/2026-04-18_1600.md <<'EOF'
+cat > .handovers/2026-04-18_1600.md <<'EOF'
 # Handover 2026-04-18
 
 ## What was done

@@ -2,7 +2,7 @@
 # Seed a plain (non-git) notes folder with one prior legacy handover note.
 set -euo pipefail
 
-mkdir -p notes .claude/handovers
+mkdir -p notes .handovers
 cat > notes/research.md <<'EOF'
 # Research notes
 
@@ -11,7 +11,7 @@ cat > notes/research.md <<'EOF'
 EOF
 
 # Legacy note: written before the frontmatter convention existed.
-cat > .claude/handovers/2026-01-01_0000.md <<'EOF'
+cat > .handovers/2026-01-01_0000.md <<'EOF'
 # Handover 2026-01-01
 
 ## What was done

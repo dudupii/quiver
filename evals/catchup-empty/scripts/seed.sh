@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Seed a plain non-git project with NO .claude directory at all: the catchup
-# arrow must notice the missing handovers directory, say so briefly, and stop.
+# Seed a plain non-git project with NO handover directory at all: the catchup
+# arrow must notice both are missing (.handovers/ and legacy .claude/handovers/),
+# say so briefly, and stop.
 set -euo pipefail
 
 mkdir -p src

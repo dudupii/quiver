@@ -2,10 +2,10 @@
 type: regex
 target: files
 match: count:0
-pattern: "\\.claude/handovers/"
+pattern: "handovers/"
 ---
 
-Zero files under the handover directory are created or modified — no new
+Zero files under either handover directory (`.handovers/` or legacy `.claude/handovers/`) are created or modified — no new
 note, no `.lang` rewrite (the pattern covers everything under the dir,
 `.lang` included). Assumes the `files` target lists files the run created;
 the four seeded notes and `.lang` must not count. If this grader fails with

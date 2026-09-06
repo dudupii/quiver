@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Seed a git repo where the handover directory is TRACKED: a prior note is
-# committed, so `git ls-files .claude/handovers/` lists it.
+# committed, so `git ls-files .handovers/` lists it.
 set -euo pipefail
 
 git init -q -b main
 git config user.name "Test User"
 git config user.email "test@example.com"
 
-mkdir -p src .claude/handovers
+mkdir -p src .handovers
 echo "def order(): pass" > src/order.py
-cat > .claude/handovers/2026-01-01_0000.md <<'EOF'
+cat > .handovers/2026-01-01_0000.md <<'EOF'
 # Handover 2026-01-01
 
 ## What was done

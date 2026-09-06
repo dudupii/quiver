@@ -9,8 +9,8 @@
 # note bodies are English — determinism comes from memory, not inference.
 set -euo pipefail
 
-mkdir -p src .claude/handovers
-printf 'zh\n' > .claude/handovers/.lang
+mkdir -p src .handovers
+printf 'zh\n' > .handovers/.lang
 
 cat > src/fetch.py <<'EOF'
 def fetch(url, retries=3):
@@ -22,7 +22,7 @@ def fetch(url, retries=3):
                 raise
 EOF
 
-cat > .claude/handovers/2026-01-01_0000.md <<'EOF'
+cat > .handovers/2026-01-01_0000.md <<'EOF'
 ---
 author: Test User
 branch: main
@@ -66,7 +66,7 @@ none
 EOF
 
 # Legacy note: written before the frontmatter convention existed.
-cat > .claude/handovers/2026-02-10_0900.md <<'EOF'
+cat > .handovers/2026-02-10_0900.md <<'EOF'
 # Handover 2026-02-10
 
 ## What was done
@@ -103,7 +103,7 @@ none
 - src/fetch.py
 EOF
 
-cat > .claude/handovers/2026-03-05_1400.md <<'EOF'
+cat > .handovers/2026-03-05_1400.md <<'EOF'
 ---
 author: Test User
 branch: main
@@ -147,7 +147,7 @@ none
 - src/worker.py
 EOF
 
-cat > .claude/handovers/2026-04-18_1600.md <<'EOF'
+cat > .handovers/2026-04-18_1600.md <<'EOF'
 ---
 author: Test User
 branch: main
