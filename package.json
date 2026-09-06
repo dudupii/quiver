@@ -9,6 +9,11 @@
     "url": "git+https://github.com/dudupii/quiver.git"
   },
   "pi": {
-    "skills": ["./skills/"]
+    "skills": [
+      "./skills/"
+    ]
+  },
+  "scripts": {
+    "check": "node scripts/check-manifests.mjs"
   }
 }
