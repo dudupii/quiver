@@ -1,6 +1,6 @@
 {
   "name": "quiver",
-  "description": "One arrow, one skill. A growing quiver of Claude Code skills — brainstorm for design alignment, handover for multilingual session notes, catchup for reading them back.",
+  "description": "One arrow, one skill. A growing quiver of skills for AI coding agents (Claude Code, Codex, pi, PrimeAgent) — brainstorm for design alignment, handover for multilingual session notes, catchup for reading them back.",
   "owner": {
     "name": "dudupii",
     "url": "https://github.com/dudupii"

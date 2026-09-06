@@ -2,7 +2,9 @@
 
 One arrow, one skill. 🏹
 
-A growing quiver of [Claude Code](https://claude.com/claude-code) skills. Small, sharp, and independent — grab only what you need.
+A growing quiver of skills for AI coding agents — [Claude Code](https://claude.com/claude-code), [Codex](https://developers.openai.com/codex/), [pi](https://pi.dev/), and [PrimeAgent](https://github.com/PrimeIntellect-ai/prime-agent) (pi-compatible agents generally). Small, sharp, and independent — grab only what you need.
+
+One source of skills, thin per-agent adapters: every agent gets the same arrows from this one repo.
 
 ## Arrows
 
@@ -16,6 +18,8 @@ More arrows coming.
 
 ## Install
 
+**Claude Code**
+
 ```bash
 claude plugin marketplace add dudupii/quiver
 claude plugin install quiver@quiver
@@ -23,13 +27,37 @@ claude plugin install quiver@quiver
 
 All arrows install together, namespaced under `/quiver:` — and bare names work too (`/brainstorm`, `/handover`).
 
-## Update
+**Codex**
 
 ```bash
-claude plugin update quiver
+codex plugin marketplace add dudupii/quiver
+codex plugin add quiver@quiver
 ```
 
-**Restart the session to apply.** If the version looks stale, refresh the marketplace first (`claude plugin marketplace update quiver`), then update again.
+Skills appear in the session catalog as `quiver:brainstorm`, `quiver:catchup`, `quiver:grilling`; `handover` stays out of the automatic catalog on purpose (it fires only when you ask for it).
+
+**pi**
+
+```bash
+pi install git:github.com/dudupii/quiver
+```
+
+Pin a release with `pi install git:github.com/dudupii/quiver@v0.4.0`.
+
+**PrimeAgent** (built on pi, same package format)
+
+```bash
+prime-agent package install git:github.com/dudupii/quiver
+```
+
+## Update
+
+| Agent | Command |
+|---|---|
+| Claude Code | `claude plugin update quiver` — restart the session to apply; refresh the marketplace first (`claude plugin marketplace update quiver`) if the version looks stale |
+| Codex | `codex plugin marketplace upgrade quiver`, then reinstall via `codex plugin add quiver@quiver` |
+| pi | `pi update` |
+| PrimeAgent | `prime-agent package update` |
 
 ## Arrow: handover
 
@@ -39,8 +67,10 @@ A session-end handover note that a human (or the next session) can pick up.
 - **Reference, don't duplicate**: content already captured in specs, plans, ADRs, issues, commits, diffs or earlier handovers is linked by path, never copied
 - **Suggested skills**: names which skills the next session should invoke, and for what
 - **Redaction**: no API keys, tokens, passwords or personal data in the note — a mechanical credential scan runs before every write
-- **Language**: `/quiver:handover` infers the language from your messages (English fallback); `/quiver:handover ja` / `/quiver:handover zh` set it explicitly — bare `/handover` works too. An explicit choice is remembered per project in `.claude/handovers/.lang` and becomes the default for the next run
-- Notes land in `.claude/handovers/YYYY-MM-DD_HHmm.md` (name collisions get `_2`, `_3`, …), each starting with YAML frontmatter: `author` (git `user.name` only — never an email), `branch`, `commit`, `lang`, and `continues:` linking to the previous note. Fields are silently omitted where unavailable; notes from before this convention still work
+- **Language**: `/quiver:handover` infers the language from your messages (English fallback); `/quiver:handover ja` / `/quiver:handover zh` set it explicitly — bare `/handover` works too. An explicit choice is remembered per project in `.handovers/.lang` and becomes the default for the next run
+- Notes land in `.handovers/YYYY-MM-DD_HHmm.md` (name collisions get `_2`, `_3`, …), each starting with YAML frontmatter: `author` (git `user.name` only — never an email), `branch`, `commit`, `lang`, and `continues:` linking to the previous note. Fields are silently omitted where unavailable; notes from before this convention still work
+- **User-requested only**: handover never fires on its own — a session merely ending is not a trigger; you (or the next session's human) have to ask for it
+- **Legacy path**: notes written before v0.4.0 live in `.claude/handovers/` — they are still read (for `continues`, catchup, and the language memory) but never rewritten; new notes always go to `.handovers/`
 - **Git-aware, git-read-only**: when the handover directory is tracked in git, handover closes with a one-line suggestion to commit the note so teammates see it; when it's ignored or untracked, it says nothing about git. It never runs a state-changing git command
 
 ## Arrow: catchup
@@ -53,8 +83,8 @@ It is model-invocable — it can trigger on its own when a session starts or tak
 
 The handover directory is the sharing medium:
 
-1. **Track `.claude/handovers/` in git.** Everyone's sessions write notes into the same directory. Handover notices the directory is tracked and suggests committing each note — one line; the skill itself never touches git state.
-2. **Agree on one note language.** `.claude/handovers/.lang` is a single shared value per project (last write wins). Set it once with `/quiver:handover zh` (or `ja` / `en`) and everyone's notes follow.
+1. **Track `.handovers/` in git.** Everyone's sessions write notes into the same directory — whatever agent they drive (Claude Code, Codex, pi, …). Handover notices the directory is tracked and suggests committing each note — one line; the skill itself never touches git state.
+2. **Agree on one note language.** `.handovers/.lang` is a single shared value per project (last write wins). Set it once with `/quiver:handover zh` (or `ja` / `en`) and everyone's notes follow.
 3. **Start sessions with `/quiver:catchup`.** Latest notes plus the commits since the newest one — context rehydrated in a single command, with nothing stale trusted blindly.
 
 ## Arrow: brainstorm

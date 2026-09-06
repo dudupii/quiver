@@ -2,7 +2,9 @@
 
 一箭一技。🏹
 
-一个持续扩充的 [Claude Code](https://claude.com/claude-code) 技能箭袋。每支箭都小巧、锋利、独立——需要哪支拔哪支。
+一个持续扩充的 AI 编码 agent 技能箭袋——支持 [Claude Code](https://claude.com/claude-code)、[Codex](https://developers.openai.com/codex/)、[pi](https://pi.dev/)、[PrimeAgent](https://github.com/PrimeIntellect-ai/prime-agent)(以及一切兼容 pi 包格式的 agent)。每支箭都小巧、锋利、独立——需要哪支拔哪支。
+
+单一技能源 + 各 agent 薄适配:所有 agent 从同一个仓库获得同一套箭。
 
 ## 箭囊
 
@@ -16,6 +18,8 @@
 
 ## 安装
 
+**Claude Code**
+
 ```bash
 claude plugin marketplace add dudupii/quiver
 claude plugin install quiver@quiver
@@ -23,13 +27,37 @@ claude plugin install quiver@quiver
 
 所有箭一起安装，统一挂在 `/quiver:` 命名空间下——裸名 `/brainstorm`、`/handover` 也能用。
 
-## 更新
+**Codex**
 
 ```bash
-claude plugin update quiver
+codex plugin marketplace add dudupii/quiver
+codex plugin add quiver@quiver
 ```
 
-**重启会话后生效。**若版本号看起来没变，先刷新 marketplace（`claude plugin marketplace update quiver`）再更新一次。
+技能以 `quiver:brainstorm`、`quiver:catchup`、`quiver:grilling` 出现在会话技能目录;`handover` 有意不出现在自动目录里(只在你明确要求时触发)。
+
+**pi**
+
+```bash
+pi install git:github.com/dudupii/quiver
+```
+
+可用 `pi install git:github.com/dudupii/quiver@v0.4.0` 锚定版本。
+
+**PrimeAgent**(构建于 pi 之上,同包格式)
+
+```bash
+prime-agent package install git:github.com/dudupii/quiver
+```
+
+## 更新
+
+| Agent | 命令 |
+|---|---|
+| Claude Code | `claude plugin update quiver`——重启会话生效;版本没变先刷新 marketplace(`claude plugin marketplace update quiver`) |
+| Codex | `codex plugin marketplace upgrade quiver`,再 `codex plugin add quiver@quiver` 重装 |
+| pi | `pi update` |
+| PrimeAgent | `prime-agent package update` |
 
 ## 箭支详解：handover
 
@@ -39,8 +67,10 @@ claude plugin update quiver
 - **只引用不重复**：已落在 spec/plan/ADR/issue/commit/diff/早期交接里的内容，一律引用路径，绝不复述
 - **建议技能**节：点名下个会话该调哪些 skill、用来做什么
 - **脱敏**：笔记中不出现 API key、token、密码、个人数据——每次写入前跑一遍凭据特征机械扫描
-- **语言**：`/quiver:handover` 自动从你的消息推断（回退英文）；`/quiver:handover ja`、`/quiver:handover zh` 显式指定——裸名 `/handover` 也可。显式选择按项目记忆在 `.claude/handovers/.lang`，下次自动沿用
-- 笔记落在 `.claude/handovers/YYYY-MM-DD_HHmm.md`（重名加 `_2`、`_3`…），开头带 YAML frontmatter：`author`（仅 git `user.name`，绝不写 email）、`branch`、`commit`、`lang`，以及链向上一篇的 `continues:`。取不到的字段静默省略；旧格式笔记照常有效
+- **语言**：`/quiver:handover` 自动从你的消息推断（回退英文）；`/quiver:handover ja`、`/quiver:handover zh` 显式指定——裸名 `/handover` 也可。显式选择按项目记忆在 `.handovers/.lang`，下次自动沿用
+- 笔记落在 `.handovers/YYYY-MM-DD_HHmm.md`（重名加 `_2`、`_3`…），开头带 YAML frontmatter：`author`（仅 git `user.name`，绝不写 email）、`branch`、`commit`、`lang`，以及链向上一篇的 `continues:`。取不到的字段静默省略；旧格式笔记照常有效
+- **仅限用户主动触发**：handover 绝不自行启动——会话结束本身不是触发条件,必须有人明确要求
+- **旧路径**：v0.4.0 之前的笔记在 `.claude/handovers/`——仍然可读（`continues`、catchup、语言记忆都会读它）但绝不改写;新笔记一律写 `.handovers/`
 - **感知 git、但只读 git**：交接目录被 git 跟踪时，结束附一句"提交这篇笔记让队友看到"；被忽略或未跟踪时对 git 只字不提。绝不执行任何改变 git 状态的命令
 
 ## 箭支详解：catchup
@@ -53,8 +83,8 @@ handover 的读取侧。`/quiver:catchup`（裸名 `/catchup` 也可）读取最
 
 交接目录就是共享介质：
 
-1. **把 `.claude/handovers/` 纳入 git 跟踪。**所有人的会话都往同一目录写笔记。handover 察觉目录被跟踪后，会建议提交每篇新笔记——只有一句建议；技能本身绝不碰 git 状态。
-2. **约定一种笔记语言。**`.claude/handovers/.lang` 是每个项目一个的共享值（后写覆盖）。用 `/quiver:handover zh`（或 `ja`/`en`）设一次，所有人的笔记随之统一。
+1. **把 `.handovers/` 纳入 git 跟踪。**所有人的会话都往同一目录写笔记——无论用哪个 agent(Claude Code、Codex、pi…)。handover 察觉目录被跟踪后，会建议提交每篇新笔记——只有一句建议；技能本身绝不碰 git 状态。
+2. **约定一种笔记语言。**`.handovers/.lang` 是每个项目一个的共享值（后写覆盖）。用 `/quiver:handover zh`（或 `ja`/`en`）设一次，所有人的笔记随之统一。
 3. **会话开头跑 `/quiver:catchup`。**最近的笔记加上最新一篇之后的提交——一条命令恢复上下文，不盲信过时信息。
 
 ## 箭支详解：brainstorm
