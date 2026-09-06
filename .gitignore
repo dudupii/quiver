@@ -1,1 +1,15 @@
 evals/results/
+
+# local agent-skill config (CLAUDE.md Agent-skills block + docs/agents/), and
+# the domain docs they point at (CONTEXT.md / ADRs feed grill-with-docs,
+# domain-modeling etc.) — this is a public repo, keep all of it local
+CLAUDE.md
+docs/agents/
+CONTEXT.md
+CONTEXT-MAP.md
+docs/adr/
+
+# local session handover notes (dogfooding, not part of the shipped plugin);
+# .handovers/ is the neutral path arriving with v0.4.0
+.claude/handovers/
+.handovers/
