@@ -13,12 +13,17 @@ what the automated eval suite cannot see (per-agent install surfaces).
    clone path) → `codex plugin add quiver@quiver` → in a scratch repo run a
    handover and a catchup; confirm `quiver:handover` and `quiver:relay` are
    absent from the implicit skill catalog (only explicit invocation reaches
-   them).
+   them). Then run `/relay` explicitly: it must report that Codex has no
+   local background launch and echo the seed as the manual path — no
+   process gets spawned.
 4. **pi**: `pi install git:github.com/dudupii/quiver` → same scratch-repo
    handover/catchup; confirm brainstorm/catchup appear and handover/relay
-   stay out of the implicit catalog. PrimeAgent uses the same package format
+   stay out of the implicit catalog. With tmux installed, run `/relay`:
+   a detached tmux session appears (`tmux ls` shows the descriptive name)
+   running `pi -p` headless. PrimeAgent uses the same package format
    (`prime-agent package install git:github.com/dudupii/quiver`) — smoke it
-   when a binary is at hand.
+   when a binary is at hand: `/relay` should spawn via the built-in
+   subagent mechanism and show up in `prime-agent agents`.
 5. **Claude Code**: `claude plugin marketplace update quiver && claude
    plugin update quiver`, restart, `/handover` + `/catchup` + `/relay` once
    (relay needs the note `/handover` just wrote — check the background job

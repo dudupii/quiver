@@ -88,7 +88,14 @@ The ignition side of handover. `/quiver:relay [focus]` (bare `/relay` works too)
 - **User-requested only** — spawning a background process is a side effect, so relay never fires on its own; the guard is mirrored in every platform's adapter policy
 - **Zero writes**: notes stay byte-identical (`.lang` included), git stays read-only — the launch is relay's only side effect
 - **No note?** relay refuses and points at `/quiver:handover` — it never invents a seed
-- **Platform support**: Claude Code uses the native background-agent launch; other agents map through their thin adapters, and where a platform has no background mechanism relay says so instead of faking a launch
+- **Platform support** — verified against each platform's own CLI and docs; where a platform has no mechanism, relay says so instead of faking a launch:
+
+  | Platform | Background mechanism | What relay does |
+  |---|---|---|
+  | Claude Code | Native (`claude --bg`) | Launches; managed from the job list |
+  | Codex CLI | None local — `exec` is foreground; `queue`/`agents` only manage existing sessions | Reports it; hands you the seed for a second terminal, or the experimental `codex cloud exec` if you use Codex Cloud |
+  | pi | None in core by design — the documented path is "spawn Pi instances via tmux" | Spawns a second pi under tmux (`pi -p`), or defers to an installed subagents extension |
+  | PrimeAgent | Native — daemon-backed sessions, built-in subagents | Spawns via the built-in subagent mechanism; managed with `prime-agent agents` |
 - The loop it completes: handover writes → relay ignites an unattended agent → the agent works (and may hand over again) → catchup reads the results back
 
 ## Team workflow

@@ -88,7 +88,14 @@ handover 的点火侧。`/quiver:relay [焦点]`（裸名 `/relay` 也可）把*
 - **仅限用户主动触发**——拉起后台进程是副作用，relay 绝不自行启动；该守卫在每平台适配策略中都有镜像
 - **零写入**：笔记字节不变（含 `.lang`）、git 只读——点火是 relay 唯一的副作用
 - **没有笔记？** relay 拒绝并指向 `/quiver:handover`——绝不凭空编造种子
-- **平台支持**：Claude Code 走原生后台启动；其他 agent 经各自薄适配映射，平台没有后台机制时如实说明，绝不假装点火
+- **平台支持**——逐平台对照其自有 CLI 与文档核实；平台没有机制时如实说明，绝不假装点火：
+
+  | 平台 | 后台机制 | relay 的做法 |
+  |---|---|---|
+  | Claude Code | 原生（`claude --bg`） | 直接点火；任务列表里管理 |
+  | Codex CLI | 本地没有——`exec` 是前台运行；`queue`/`agents` 只管已有会话 | 如实说明；把种子交给你去第二个终端跑，或在你使用 Codex Cloud 时给出实验性的 `codex cloud exec` |
+  | pi | 核心刻意不做——官方文档指路"经 tmux 再起 pi 实例" | 经 tmux 再起一个 pi（`pi -p`），或遵从已安装的子代理扩展 |
+  | PrimeAgent | 原生——daemon 支撑的会话、内建子代理 | 经内建子代理机制点火；用 `prime-agent agents` 管理 |
 - 它补全的闭环：handover 写 → relay 点火无人值守 → agent 干活（可再写交接）→ catchup 读取成果
 
 ## 团队工作流

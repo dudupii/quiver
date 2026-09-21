@@ -1,0 +1,5 @@
+# PrimeAgent-specific invocation policy (ignored by other agents).
+# relay spawns a background subagent; it must only run when explicitly
+# requested.
+policy:
+  allow_implicit_invocation: false
