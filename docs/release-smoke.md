@@ -19,8 +19,9 @@ what the automated eval suite cannot see (per-agent install surfaces).
 4. **pi**: `pi install git:github.com/dudupii/quiver` → same scratch-repo
    handover/catchup; confirm brainstorm/catchup appear and handover/relay
    stay out of the implicit catalog. With tmux installed, run `/relay`:
-   a detached tmux session appears (`tmux ls` shows the descriptive name)
-   running `pi -p` headless. PrimeAgent uses the same package format
+   a detached tmux session appears (`tmux ls` shows the slug of the
+   descriptive name) running `pi -p` headless. PrimeAgent uses the same
+   package format
    (`prime-agent package install git:github.com/dudupii/quiver`) — smoke it
    when a binary is at hand: `/relay` should spawn via the built-in
    subagent mechanism and show up in `prime-agent agents`.
