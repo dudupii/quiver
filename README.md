@@ -13,6 +13,7 @@ One source of skills, thin per-agent adapters: every agent gets the same arrows 
 | **brainstorm** | Turns a rough idea into an agreed design *before* any implementation. Auto-triggers at the start of creative work. |
 | **handover** | Multilingual session handover notes (en / ja / zh) with language memory — decisions, discarded options, gotchas, next steps, suggested skills. |
 | **catchup** | Reads the latest handover notes (plus the commits since the last one) and briefs you in four sections. Strictly read-only, safe to auto-trigger. |
+| **relay** | Hands the latest handover note to a fresh background agent that picks up the work unattended — pointer seed, descriptive name, echoed command. User-requested only. |
 
 More arrows coming.
 
@@ -34,7 +35,7 @@ codex plugin marketplace add dudupii/quiver
 codex plugin add quiver@quiver
 ```
 
-Skills appear in the session catalog as `quiver:brainstorm`, `quiver:catchup`, `quiver:grilling`; `handover` stays out of the automatic catalog on purpose (it fires only when you ask for it).
+Skills appear in the session catalog as `quiver:brainstorm`, `quiver:catchup`, `quiver:grilling`; `handover` and `relay` stay out of the automatic catalog on purpose (they fire only when you ask for them).
 
 **pi**
 
@@ -79,6 +80,16 @@ A session-end handover note that a human (or the next session) can pick up.
 The read side of handover. `/quiver:catchup` (bare `/catchup` works too) reads the latest handover notes — default 3, widen with a number (`/catchup 5`) — and replies with a four-section brief: **current state / open threads and next steps / active gotchas / suggested actions**. When the newest note records a `commit`, the brief also folds in the git log since that commit, so "what happened after the last note" is answered in the same command.
 
 It is model-invocable — it can trigger on its own when a session starts or takes over work in a project that has handover notes — because it is strictly read-only: it writes nothing anywhere, not even the language memory. Legacy notes without frontmatter are read like any other.
+
+## Arrow: relay
+
+The ignition side of handover. `/quiver:relay [focus]` (bare `/relay` works too) hands the **latest** handover note to a brand-new background agent on this machine: the seed is a pointer — "read this note, run catchup, pursue this thread" — never a copy of the note. The agent starts in the current working directory with a descriptive name (derived from the focus or the note's top next step) that you will see in the job list and terminal title; the exact launch command is echoed in the reply. An optional focus picks the thread; the default is the note's top-priority next step.
+
+- **User-requested only** — spawning a background process is a side effect, so relay never fires on its own; the guard is mirrored in every platform's adapter policy
+- **Zero writes**: notes stay byte-identical (`.lang` included), git stays read-only — the launch is relay's only side effect
+- **No note?** relay refuses and points at `/quiver:handover` — it never invents a seed
+- **Platform support**: Claude Code uses the native background-agent launch; other agents map through their thin adapters, and where a platform has no background mechanism relay says so instead of faking a launch
+- The loop it completes: handover writes → relay ignites an unattended agent → the agent works (and may hand over again) → catchup reads the results back
 
 ## Team workflow
 
