@@ -14,7 +14,7 @@ Read the latest handover notes and brief the incoming session, in-conversation. 
 2. **State mode** — `.handovers/CURRENT.md` exists: read it first. It is the project's current state — one durable fact per line, latest state only, each with its confirmation date and source note. Then read **every note sharing the newest note's date prefix** (concurrent agents hand off same-day; the group, not just the newest note, is the event layer). A numeric argument replaces the group with the latest N notes (`/catchup 5`).
 3. **Fallback** — no `CURRENT.md`: read the latest N notes — default 3; a numeric argument widens the window (`/catchup 5`).
 4. Notes without frontmatter (legacy format) are read like any other.
-5. If neither directory exists or there are no notes, say so briefly in the resolved language and stop. Never invent content.
+5. If neither directory exists, or there are neither notes nor a `CURRENT.md`, say so briefly in the resolved language and stop. Never invent content. A `CURRENT.md` with no notes left is still briefed from — the projection is what matters.
 
 ## Git delta
 

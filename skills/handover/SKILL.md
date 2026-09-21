@@ -74,7 +74,7 @@ Notes are the **event log** and the system of record; `CURRENT.md` is the **stat
 - <fact, one telegraphic line> (confirmed YYYY-MM-DD | source: <note filename>)
 ```
 
-Flat list, no sections, no frontmatter. The fact text is written in the run's resolved language; the `confirmed`/`source` markers stay in English so every line stays greppable. Superseding replaces the line in place (new value, new date, new source); refuting deletes it; the old value survives in git history and in the source note.
+Flat list, no sections, no frontmatter. The fact text is written in the run's resolved language, stays on one line, and contains no `|` pipe — the pipe separates the fields; the `confirmed`/`source` markers stay in English so every line stays greppable. Superseding replaces the line in place (new value, new date, new source); refuting deletes it; the old value survives in git history and in the source note.
 
 **Durable vs temporal** — the judgment the projection asks for:
 
@@ -91,7 +91,7 @@ Flat list, no sections, no frontmatter. The fact text is written in the run's re
 
 **Bootstrap**: when notes exist but `CURRENT.md` does not (first run after the upgrade, or a repo that never adopted it), perform a one-time full pass over every note in both directories, distill the durable facts into entries confirmed today, each pointing at its original source note. Later runs are incremental only.
 
-**Concurrent writes**: re-read `CURRENT.md` immediately before writing and merge this session's changes into what was just read — no locks. Invariant that makes every failure recoverable: the notes are the system of record, `CURRENT.md` is a rebuildable projection; when in doubt about its integrity, the bootstrap pass is the recovery path.
+**Concurrent writes**: re-read `CURRENT.md` immediately before writing and merge this session's changes into what was just read — no locks. A git merge across branches may conflict on `CURRENT.md` like any shared text file: keep both sides' additions and the newer supersede; when in doubt, the bootstrap pass is the recovery path. Invariant that makes every failure recoverable: the notes are the system of record, `CURRENT.md` is a rebuildable projection.
 
 When the run changed the state file (including a bootstrap), the closing reply lists the changes — one line each: added, superseded, deleted (bootstrap: the entry count).
 
