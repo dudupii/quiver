@@ -3,7 +3,7 @@ name: relay-ignites
 tags: [relay]
 plugins: ["../.."]
 max_turns: 15
-allowed_tools: [Read, Glob, Grep, Bash]
+allowed_tools: [Read, Glob, Grep, Write, Bash]
 ---
 
 /relay
