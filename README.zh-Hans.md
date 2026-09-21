@@ -43,7 +43,7 @@ codex plugin add quiver@quiver
 pi install git:github.com/dudupii/quiver
 ```
 
-可用 `pi install git:github.com/dudupii/quiver@v0.4.0` 锚定版本。
+可用 `pi install git:github.com/dudupii/quiver@v0.4.1` 锚定版本。
 
 **PrimeAgent**(构建于 pi 之上,同包格式)
 
