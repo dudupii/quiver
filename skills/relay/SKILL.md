@@ -5,11 +5,11 @@ argument-hint: "[focus]"
 disable-model-invocation: true
 ---
 
-# Relay
+# Background Relay
 
 Hand the latest handover note to a brand-new background agent on this machine. The new agent starts in the current working directory, restores its context from the note, and works unattended; the user manages it with the platform's agents surface. handover writes the note, catchup reads it into the session you are in — relay reads it into a session nobody has to sit in.
 
-Reply in the language of the conversation; write the seed in the same language.
+Reply in the language of the conversation; write the seed in the same language. The `.handovers/.lang` memory governs the note, not this reply — the ignited agent resolves its own working language when it reads the note via catchup.
 
 ## Note resolution (catchup's rule)
 

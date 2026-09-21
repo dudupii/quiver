@@ -28,7 +28,7 @@ lang: en
 
 ## Gotchas
 
-- none
+- KAPPA-5: the contrast token names are frozen — never rename them
 
 ## Learnings
 

@@ -1,9 +1,11 @@
 ---
 type: regex
-target: last_message
+target: trace
 match: not_contains
-pattern: "--bg"
+pattern: "\"command\"\\s*:\\s*\"[^\"]*claude[^\"]*--bg"
 ---
 
-No launch was constructed — the refusal must not fabricate a background
-launch command out of nothing.
+No launch was actually invoked: anchored to the Bash tool-use `command`
+key, so a run that executes a launch and then refuses in its final message
+is still caught. A refusal that merely *previews* the future command in
+prose does not trip it — only a real invocation does.

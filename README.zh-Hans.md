@@ -89,7 +89,7 @@ handover 的点火侧。`/quiver:relay [焦点]`（裸名 `/relay` 也可）把*
 - **零写入**：笔记字节不变（含 `.lang`）、git 只读——点火是 relay 唯一的副作用
 - **没有笔记？** relay 拒绝并指向 `/quiver:handover`——绝不凭空编造种子
 - **平台支持**：Claude Code 走原生后台启动；其他 agent 经各自薄适配映射，平台没有后台机制时如实说明，绝不假装点火
-- 它补全的闭环：handover 写 → relay 点火无人值守 → agent 干活（可再写交接）→ catchup 收账
+- 它补全的闭环：handover 写 → relay 点火无人值守 → agent 干活（可再写交接）→ catchup 读取成果
 
 ## 团队工作流
 

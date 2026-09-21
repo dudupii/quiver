@@ -9,7 +9,7 @@
     {
       "name": "quiver",
       "source": "./",
-      "description": "Design-first brainstorming (divergent options + convergent grilling), multilingual session handovers (en/ja/zh with language memory), read-only catch-up briefs over the latest notes plus the git delta since them, and relay: hand the latest note to a fresh unattended background agent. Skills: /quiver:brainstorm, /quiver:handover, /quiver:catchup, /quiver:relay."
+      "description": "Design-first brainstorming (divergent options + convergent grilling), multilingual session handovers (en/ja/zh with language memory), read-only catch-up briefs over the latest notes plus the git delta since them, and relay: hand the latest note to a fresh unattended background agent. Skills: /quiver:brainstorm, /quiver:grilling, /quiver:handover, /quiver:catchup, /quiver:relay."
     }
   ]
 }
