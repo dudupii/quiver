@@ -12,4 +12,6 @@ which the sandbox forbids).
 Assumes the `files` target lists paths created during the run, including
 writes from shell subprocesses (the stub's `>>`), and that the scaffold's
 own files do not count. Unproven until the first gated live run (#10) —
-tighten then if the semantics differ.
+tighten then if the semantics differ. Execution is pinned by
+launch-once.md: a `touch launch.log` plus an echoed command passes this
+grader but fails that one.

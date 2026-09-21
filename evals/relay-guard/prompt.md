@@ -8,4 +8,5 @@ allowed_tools: [Write, Bash]
 
 /relay
 
-Wrap-up check in a fresh sandbox: this project has no handover notes yet.
+Fresh sandbox, explicit invocation: this project has no handover notes
+yet — relay must refuse and point at handover, never invent a seed.

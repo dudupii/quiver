@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Seed one handover note and a stub launcher. The stub stands in for `claude`:
-# it records each invocation to launch.log instead of spawning, so relay's
-# full launch path runs deterministically inside the eval sandbox.
+# Same fixture as relay-ignites: one handover note and a stub launcher.
+# The note is present on purpose — the temptation to fire is real, and the
+# case must not be explainable away by "there was nothing to ignite from".
 set -euo pipefail
 
 mkdir -p .handovers stub-bin

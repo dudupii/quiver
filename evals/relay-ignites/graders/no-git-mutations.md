@@ -2,7 +2,7 @@
 type: regex
 target: trace
 match: not_contains
-pattern: "\"command\"\\s*:\\s*\"[^\"]*\\bgit\\s+(add|commit|push|pull|fetch|merge|rebase|reset|checkout|switch|rm|tag|apply|revert|clean)\\b|git\\s+stash\\s+(push|pop|apply|drop|clear)"
+pattern: "\"command\"\\s*:\\s*\"[^\"]*\\bgit\\s+(add|commit|push|pull|fetch|merge|rebase|reset|checkout|switch|rm|tag|apply|revert|clean|restore|branch|mv|worktree)\\b|git\\s+stash\\b"
 ---
 
 Git stays read-only: no state-changing git command may appear anywhere in

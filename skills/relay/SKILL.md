@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Hand the latest handover note to a brand-new background agent on this machine. The new agent starts in the current working directory, restores its context from the note, and works unattended; the user manages it with the platform's agents surface. handover writes the note, catchup reads it into the session you are in — relay reads it into a session nobody has to sit in.
 
-Reply in the language of the conversation; write the seed in the same language. The `.handovers/.lang` memory governs the note, not this reply — the ignited agent resolves its own working language when it reads the note via catchup.
+Reply in the language of the conversation; write the seed in the same language. The `.handovers/.lang` memory governs the note, not this reply — the ignited agent resolves its own working language when it reads the note via catchup (`.lang` first, then the seed's language).
 
 ## Note resolution (catchup's rule)
 
@@ -43,4 +43,5 @@ Echo the exact launch command in the reply, on its own line, when you run it.
 - **User-requested only**: never fire on your own initiative — the guard is mirrored in every platform's adapter policy.
 - **Zero writes**: notes stay byte-identical after a run (`.lang` included), and no state-changing git command ever runs. The launch is the only side effect.
 - **Nothing beyond the note**: the seed adds no conversation summaries and no secrets — redaction is inherited from the note.
+- **Quoting**: the name and seed travel inside shell-quoted strings — if free-text focus contains a double quote or backslash, paraphrase it out rather than letting it break or extend the command.
 - Facts only; when something fails (no note, no launcher), report it honestly and give the manual path.

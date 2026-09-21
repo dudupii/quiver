@@ -35,7 +35,7 @@ codex plugin marketplace add dudupii/quiver
 codex plugin add quiver@quiver
 ```
 
-Skills appear in the session catalog as `quiver:brainstorm`, `quiver:catchup`, `quiver:grilling`; `handover` and `relay` stay out of the automatic catalog on purpose (they fire only when you ask for it).
+Skills appear in the session catalog as `quiver:brainstorm`, `quiver:catchup`, `quiver:grilling`; `handover` and `relay` stay out of the automatic catalog on purpose (they fire only when you ask for them).
 
 **pi**
 
