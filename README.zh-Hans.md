@@ -68,6 +68,7 @@ prime-agent package install git:github.com/dudupii/quiver
 - **建议技能**节：点名下个会话该调哪些 skill、用来做什么
 - **脱敏**：笔记中不出现 API key、token、密码、个人数据——每次写入前跑一遍凭据特征机械扫描
 - **语言**：`/quiver:handover` 自动从你的消息推断（回退英文）；`/quiver:handover ja`、`/quiver:handover zh` 显式指定——裸名 `/handover` 也可。显式选择按项目记忆在 `.handovers/.lang`，下次自动沿用
+- **焦点**：语言 token 之后的全部参数——或参数不以语言开头时的整段——告诉笔记下个会话要主攻什么（`/quiver:handover zh 收尾发布`、`/handover 修复登录 bug`）。只调详略、不做取舍：八段结构照写，被聚焦的线索写深、占下一步首位，其余收敛到要点
 - 笔记落在 `.handovers/YYYY-MM-DD_HHmm.md`（重名加 `_2`、`_3`…），开头带 YAML frontmatter：`author`（仅 git `user.name`，绝不写 email）、`branch`、`commit`、`lang`，以及链向上一篇的 `continues:`。取不到的字段静默省略；旧格式笔记照常有效
 - **仅限用户主动触发**：handover 绝不自行启动——会话结束本身不是触发条件,必须有人明确要求
 - **旧路径**：v0.4.0 之前的笔记在 `.claude/handovers/`——仍然可读（`continues`、catchup、语言记忆都会读它）但绝不改写;新笔记一律写 `.handovers/`

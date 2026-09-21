@@ -1,25 +1,40 @@
 ---
 name: handover
 description: Write a session handover note at the end of a session or milestone — what was done, decisions, discarded options and why, gotchas, learnings, next steps, suggested skills. User-requested only - invoke when the user explicitly says "handover", "交接", "引き継ぎ", or clearly asks for a handover note; a session merely ending is NOT a trigger. Never invoke on your own initiative.
-argument-hint: "[en|ja|zh]"
+argument-hint: "[en|ja|zh] [focus]"
 disable-model-invocation: true
 ---
 
 # Session Handover
 
-Generate a handover note for this session's work, in the resolved language.
+Generate a handover note for this session's work, in the resolved language, weighted toward the focus when one was passed.
 
 ## Note locations: read old, write new
 
 Notes live in `.handovers/` at the project root. The legacy `.claude/handovers/` (pre-0.4.0) is still **read** — for prior notes and the language memory — but never written. Never move, rename, or delete a legacy note; migration is the user's business.
 
+## Argument parsing
+
+The argument (when present) splits into an optional language token and an optional free-text focus:
+
+- If the **first token** is exactly `en`, `ja`, or `zh`, it is the language; **everything after it** is the focus. `/handover zh finalize the release` → language `zh`, focus `finalize the release`.
+- Otherwise the **entire argument** is the focus and the language resolves through the usual chain below. `/handover fix login bug` → focus `fix login bug`, language inferred.
+- An empty argument means neither: uniform-depth note, language as usual.
+
 ## Language resolution
 
-1. If the user passed `en`, `ja`, or `zh` as the argument, use it.
+1. If the argument carried a language token, use it.
 2. Otherwise read `.handovers/.lang`, then legacy `.claude/handovers/.lang`; use the first that exists.
 3. Otherwise infer the language from the user's messages in this session; when they are mixed or unclear, fall back to `en`.
 
-When the language came from an argument, persist it to `.handovers/.lang` (creating the directory if needed) so the next run defaults to it. Write the entire note — including section headers — in the resolved language.
+When the language came from an argument token, persist it to `.handovers/.lang` (creating the directory if needed) so the next run defaults to it. Write the entire note — including section headers — in the resolved language.
+
+## Focus
+
+The focus names what the next session will concentrate on. It shapes emphasis only:
+
+- **Emphasis, not selection**: write every section as usual. Deepen the threads the focus touches — richer entries under *What was done* / *Gotchas*, the focused thread's items at the top of *Next steps* — and condense unrelated threads to their essentials.
+- The focus licenses no other change: no dropping or inventing facts, and every rule in **Rules** (reference-don't-duplicate, redaction, facts-only) applies unchanged.
 
 ## Rules
 
@@ -53,7 +68,7 @@ Metadata rules:
 
 ## Process
 
-1. Review what this session did.
+1. Review what this session did, weighing each thread against the focus (if any) to decide its depth.
 2. Collect note metadata with read-only lookups: `git config user.name`, `git branch --show-current`, `git rev-parse --short HEAD`, and the latest existing note filename across both directories (omit fields whose lookup fails).
 3. Ensure `.handovers/` exists.
 4. Write the note — frontmatter block, then every section — to `.handovers/YYYY-MM-DD_HHmm.md` (e.g. `2026-02-17_1430.md`). On name collision append `_2`, `_3`, …
