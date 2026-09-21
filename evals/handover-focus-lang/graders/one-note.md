@@ -2,7 +2,7 @@
 type: regex
 target: files
 match: count:1
-pattern: "\\.handovers/[^/]*\\.md"
+pattern: "\\.handovers/\\d{4}-[^/]*\\.md"
 ---
 
 Exactly one note file is created — the `.lang` memory file, though also
