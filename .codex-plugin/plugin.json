@@ -9,6 +9,6 @@
   "repository": "https://github.com/dudupii/quiver",
   "homepage": "https://github.com/dudupii/quiver",
   "license": "MIT",
-  "keywords": ["handover", "catchup", "brainstorm", "grilling"],
+  "keywords": ["handover", "catchup", "relay", "brainstorm", "grilling"],
   "skills": "./skills/"
 }

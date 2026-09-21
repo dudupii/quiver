@@ -13,6 +13,7 @@
 | **brainstorm** | 在任何实现开始**之前**，把模糊想法自动对齐成共识设计。创造性工作开始时自动触发。 |
 | **handover** | 多语言会话交接笔记（英/日/中），带语言记忆——决策、放弃的选项与理由、踩坑、下一步、建议技能。 |
 | **catchup** | 读取最近的交接笔记（外加最后一次交接之后的提交），四段式简报带你恢复上下文。纯只读，可安全自动触发。 |
+| **relay** | 把最新交接笔记交给全新后台 agent 无人值守接棒——指针种子、描述性名称、回显命令。仅限用户主动触发。 |
 
 更多箭支在路上。
 
@@ -34,7 +35,7 @@ codex plugin marketplace add dudupii/quiver
 codex plugin add quiver@quiver
 ```
 
-技能以 `quiver:brainstorm`、`quiver:catchup`、`quiver:grilling` 出现在会话技能目录;`handover` 有意不出现在自动目录里(只在你明确要求时触发)。
+技能以 `quiver:brainstorm`、`quiver:catchup`、`quiver:grilling` 出现在会话技能目录;`handover` 与 `relay` 有意不出现在自动目录里(只在你明确要求时触发)。
 
 **pi**
 
@@ -79,6 +80,16 @@ prime-agent package install git:github.com/dudupii/quiver
 handover 的读取侧。`/quiver:catchup`（裸名 `/catchup` 也可）读取最近的交接笔记——默认 3 篇，传数字可加宽（`/catchup 5`）——以四段式简报作答：**当前状态 / 待办线索与下一步 / 仍有效的踩坑记录 / 建议行动**。当最新笔记记录了 `commit`，简报还会折入该提交之后的 git log，"最后一次交接之后发生了什么"一条命令回答。
 
 它允许模型自动触发——新会话接手一个有交接笔记的项目时可自行启动——因为它严格只读：不写任何文件，连语言记忆都不碰。无 frontmatter 的旧格式笔记照常读取。
+
+## 箭支详解：relay
+
+handover 的点火侧。`/quiver:relay [焦点]`（裸名 `/relay` 也可）把**最新**交接笔记交给本机一个全新后台 agent：种子是指针——"读这篇笔记、跑 catchup、主攻这条线索"——绝不是笔记的拷贝。agent 以描述性名称（从焦点或笔记最高优先级下一步派生）在当前工作目录启动，任务列表和终端标题里一眼可辨；确切启动命令会回显在回复里。可选焦点指定接棒线索；默认取笔记最高优先级的下一步。
+
+- **仅限用户主动触发**——拉起后台进程是副作用，relay 绝不自行启动；该守卫在每平台适配策略中都有镜像
+- **零写入**：笔记字节不变（含 `.lang`）、git 只读——点火是 relay 唯一的副作用
+- **没有笔记？** relay 拒绝并指向 `/quiver:handover`——绝不凭空编造种子
+- **平台支持**：Claude Code 走原生后台启动；其他 agent 经各自薄适配映射，平台没有后台机制时如实说明，绝不假装点火
+- 它补全的闭环：handover 写 → relay 点火无人值守 → agent 干活（可再写交接）→ catchup 收账
 
 ## 团队工作流
 
