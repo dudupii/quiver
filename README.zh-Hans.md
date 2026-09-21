@@ -73,11 +73,12 @@ prime-agent package install git:github.com/dudupii/quiver
 - 笔记落在 `.handovers/YYYY-MM-DD_HHmm.md`（重名加 `_2`、`_3`…），开头带 YAML frontmatter：`author`（仅 git `user.name`，绝不写 email）、`branch`、`commit`、`lang`，以及链向上一篇的 `continues:`。取不到的字段静默省略；旧格式笔记照常有效
 - **仅限用户主动触发**：handover 绝不自行启动——会话结束本身不是触发条件,必须有人明确要求
 - **旧路径**：v0.4.0 之前的笔记在 `.claude/handovers/`——仍然可读（`continues`、catchup、语言记忆都会读它）但绝不改写;新笔记一律写 `.handovers/`
+- **当前状态文件**：写笔记的同时,handover 维护 `.handovers/CURRENT.md`——每条持久事实一行、只存最新态,带确认日期与来源笔记;本会话未触碰的条目绝不改写,有笔记的仓库首次运行会回扫全部历史建立该文件
 - **感知 git、但只读 git**：交接目录被 git 跟踪时，结束附一句"提交这篇笔记让队友看到"；被忽略或未跟踪时对 git 只字不提。绝不执行任何改变 git 状态的命令
 
 ## 箭支详解：catchup
 
-handover 的读取侧。`/quiver:catchup`（裸名 `/catchup` 也可）读取最近的交接笔记——默认 3 篇，传数字可加宽（`/catchup 5`）——以四段式简报作答：**当前状态 / 待办线索与下一步 / 仍有效的踩坑记录 / 建议行动**。当最新笔记记录了 `commit`，简报还会折入该提交之后的 git log，"最后一次交接之后发生了什么"一条命令回答。
+handover 的读取侧。`/quiver:catchup`（裸名 `/catchup` 也可）读取最近的交接笔记——默认 3 篇，传数字可加宽（`/catchup 5`）——以四段式简报作答：**当前状态 / 待办线索与下一步 / 仍有效的踩坑记录 / 建议行动**。当最新笔记记录了 `commit`，简报还会折入该提交之后的 git log，"最后一次交接之后发生了什么"一条命令回答。当 `.handovers/CURRENT.md` 存在时，catchup 先读它——每条持久事实连确认日期一起呈现——再读与最新笔记同日期的全部笔记（同日并行交接一并覆盖）；没有该文件时，默认 3 篇窗口照旧。
 
 它允许模型自动触发——新会话接手一个有交接笔记的项目时可自行启动——因为它严格只读：不写任何文件，连语言记忆都不碰。无 frontmatter 的旧格式笔记照常读取。
 

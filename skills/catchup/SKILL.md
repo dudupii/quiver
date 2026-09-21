@@ -10,10 +10,11 @@ Read the latest handover notes and brief the incoming session, in-conversation. 
 
 ## Reading the notes
 
-1. List `*.md` files in `.handovers/` and in legacy `.claude/handovers/` (pre-0.4.0), merge the lists, and sort by filename; on a filename tie the `.handovers/` copy wins; `.lang` files are not notes.
-2. Read the latest N notes — default 3; a numeric argument widens the window (`/catchup 5`).
-3. Notes without frontmatter (legacy format) are read like any other.
-4. If neither directory exists or there are no notes, say so briefly in the resolved language and stop. Never invent content.
+1. List `*.md` files in `.handovers/` and in legacy `.claude/handovers/` (pre-0.4.0), merge the lists, and sort by filename; on a filename tie the `.handovers/` copy wins; `.lang` and `CURRENT.md` are not notes.
+2. **State mode** — `.handovers/CURRENT.md` exists: read it first. It is the project's current state — one durable fact per line, latest state only, each with its confirmation date and source note. Then read **every note sharing the newest note's date prefix** (concurrent agents hand off same-day; the group, not just the newest note, is the event layer). A numeric argument replaces the group with the latest N notes (`/catchup 5`).
+3. **Fallback** — no `CURRENT.md`: read the latest N notes — default 3; a numeric argument widens the window (`/catchup 5`).
+4. Notes without frontmatter (legacy format) are read like any other.
+5. If neither directory exists or there are no notes, say so briefly in the resolved language and stop. Never invent content.
 
 ## Git delta
 
@@ -30,7 +31,7 @@ Never persist the language — handover is the sole writer of `.lang`.
 
 ## Read-only
 
-No file writes of any kind, no git state changes, nothing persisted. After a run both handover directories (including every `.lang`) are byte-identical.
+No file writes of any kind, no git state changes, nothing persisted. After a run both handover directories (including every `.lang` and `CURRENT.md`) are byte-identical.
 
 ## The brief
 
@@ -48,5 +49,7 @@ Four sections, in order, all localized:
 </section-table>
 
 - Synthesize; cite note filenames so every claim traces back.
+- Facts from `CURRENT.md` ride **with their confirmation dates** — surface the date next to each state fact; never grade freshness against a threshold. Dates are honest; cutoffs are false precision. A state entry outranks what an older note claims — the projection is later than the event.
+- When the newest-date group holds more than one note, say so — count and authors (frontmatter `author`) — so same-day parallel handoffs are visible at a glance.
 - Next steps come from the notes' "Next steps" sections, gotchas from "Gotchas". Drop threads a later note already resolved.
 - Facts only, no fabrication: if the notes don't say it, the brief doesn't say it.

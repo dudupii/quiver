@@ -2,7 +2,7 @@
 type: regex
 target: files
 match: count:1
-pattern: "\\.handovers/[^/]*\\.md"
+pattern: "\\.handovers/\\d{4}-[^/]*\\.md"
 ---
 
 A new note is written despite the directory not being a git repository.

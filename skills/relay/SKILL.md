@@ -13,7 +13,7 @@ Reply in the language of the conversation; write the seed in the same language. 
 
 ## Note resolution (catchup's rule)
 
-1. List `*.md` notes in `.handovers/` and in legacy `.claude/handovers/` (pre-0.4.0), merge, sort by filename; on a filename tie the `.handovers/` copy wins; `.lang` files are not notes.
+1. List `*.md` notes in `.handovers/` and in legacy `.claude/handovers/` (pre-0.4.0), merge, sort by filename; on a filename tie the `.handovers/` copy wins; `.lang` files and `CURRENT.md` are not notes.
 2. Take the newest. Legacy notes without frontmatter are valid seeds.
 3. No note in either directory → refuse: say so and point at `/quiver:handover` as the way to create one. Never invent a seed.
 
