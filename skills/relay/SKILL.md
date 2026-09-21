@@ -33,15 +33,19 @@ Optional free text naming the thread the new agent pursues. Default: the note's 
 
 ## Launch
 
-- **Claude Code**: run `claude --bg --name "<descriptive name>" "<seed>"`. The name derives from the focus or the top next step (e.g. `quiver #12 relay arrow`); it is what the user sees in the job list, session picker, and terminal title. The command returns immediately.
-- **Codex / pi / PrimeAgent**: use the platform's background-agent mechanism per its adapter. Where the platform has none, say it is unsupported here and suggest launching manually with the echoed seed — never fake a launch.
+Drive the platform's real background mechanism — the mapping below is verified against each platform's own CLI and docs. Never fake a launch, and never detach an orphan process the platform's agents surface cannot show.
 
-Echo the exact launch command in the reply, on its own line, when you run it.
+- **Claude Code**: run `claude --bg --name "<descriptive name>" "<seed>"`. The name derives from the focus or the top next step (e.g. `quiver #12 relay arrow`); it is what the user sees in the job list, session picker, and terminal title. The command returns immediately.
+- **Codex**: no local background launch exists — `codex exec` runs in the foreground, `codex queue` only feeds an existing session, and `codex agents` only browses existing sessions. Report exactly that, then give the manual paths: `codex exec "<seed>"` in a second terminal or tmux pane; or, if the user runs Codex Cloud, the experimental `codex cloud exec --env <ENV_ID> "<seed>"` — echo that one for the user, never run it yourself: it spends cloud compute.
+- **pi**: the core spawns no agents of its own — the platform's documented path is a second pi instance via tmux. If a background-agent extension package is installed (the pi-subagents family — check `pi list`), defer to it per its own docs; it inherits this skill's explicit-only and zero-writes rules. Otherwise, when tmux is available run `tmux new-session -d -s "<slug>" 'pi -p --name "<name>" -- "<seed>"'` — the tmux session takes a slug of the descriptive name (tmux rewrites `.` and `:` to `_` in session names, and a `#` unquoted would comment the command away: spaces become dashes, `.`/`:`/`#` and shell metacharacters drop, other characters including non-Latin ones are kept, e.g. `quiver #12 relay arrow` → `quiver-12-relay-arrow`; fall back to `relay` if nothing survives, append `-2`, `-3`, … if the slug is taken), while `pi --name` carries the full descriptive name; `pi -p` is the headless one-shot run, the user watches progress with `tmux attach -t <slug>` and revisits the saved session via `pi --resume`. Without tmux, report unsupported and hand over the seed for a manual launch.
+- **PrimeAgent**: background agents are native — sessions are daemon-backed and keep running after the terminal disconnects. Create the seeded agent as a resident daemon session the user manages from `prime-agent agents`: `rlm.create_session(prompt=<seed>, name=<descriptive name>, cwd=this directory)`. Where the host session offers only child spawning, `rlm.spawn(<seed>, name=<unique descriptive name>)` runs it as a background child instead (`name` is required and must be unique among siblings).
+
+Echo the exact launch command in the reply, on its own line, when you run it. On a platform with no mechanism, echo the seed itself as the manual path.
 
 ## Rules
 
-- **User-requested only**: never fire on your own initiative — the guard is mirrored in every platform's adapter policy.
+- **User-requested only**: never fire on your own initiative — the explicit-only wording rides the skill description every platform reads, and is declared in each adapter policy.
 - **Zero writes**: notes stay byte-identical after a run (`.lang` included), and no state-changing git command ever runs. The launch is the only side effect.
 - **Nothing beyond the note**: the seed adds no conversation summaries and no secrets — redaction is inherited from the note.
-- **Quoting**: the name and seed travel inside shell-quoted strings — if free-text focus contains a double quote or backslash, paraphrase it out rather than letting it break or extend the command.
+- **Quoting**: the name and seed travel inside shell-quoted strings — including the nested quoting of a tmux-wrapped launch, where a single quote breaks out and `$` or a backtick expands in the inner shell. Whatever the text's origin — focus argument or note-derived name and next step — paraphrase out double quotes, backslashes, single quotes, dollar signs, and backticks rather than letting them break or extend the command.
 - Facts only; when something fails (no note, no launcher), report it honestly and give the manual path.
