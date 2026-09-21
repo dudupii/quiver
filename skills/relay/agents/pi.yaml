@@ -1,6 +1,8 @@
 # pi-specific invocation policy (ignored by other agents).
-# pi does not read per-agent policy files today; declared so the guard is
-# in place the day it does. relay spawns a background pi instance; it must
-# only run when explicitly requested.
+# pi does not read per-agent policy files today: the effective guard is the
+# explicit-only wording in SKILL.md's description, which pi does read. This
+# file declares the same policy for the day pi honors policy files.
+# relay spawns a background pi instance; it must only run when explicitly
+# requested.
 policy:
   allow_implicit_invocation: false
