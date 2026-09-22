@@ -43,7 +43,7 @@ Skills appear in the session catalog as `quiver:brainstorm`, `quiver:catchup`, `
 pi install git:github.com/dudupii/quiver
 ```
 
-Pin a release with `pi install git:github.com/dudupii/quiver@v0.4.1`.
+Pin a release with `pi install git:github.com/dudupii/quiver@v0.5.0`.
 
 **PrimeAgent** (built on pi, same package format)
 
