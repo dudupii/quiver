@@ -89,11 +89,11 @@ Flat list, no sections, no frontmatter. The fact text is written in the run's re
 4. **Untouched entries are never edited and their `confirmed` dates never refreshed** — a date may only change when the fact itself was re-confirmed. Dates must not lie.
 5. Zero writes when the session produced nothing durable — never invent entries for the sake of writing.
 
-**Bootstrap**: when notes exist but `CURRENT.md` does not (first run after the upgrade, or a repo that never adopted it), perform a one-time full pass over every note in both directories, distill the durable facts into entries confirmed today, each pointing at its original source note. Later runs are incremental only.
+**Bootstrap**: when notes exist but `CURRENT.md` does not (first run after the upgrade, or a repo that never adopted it), perform a one-time full pass over every note in both directories — oldest first, so facts buried by age are not crowded out — distill the durable facts into entries confirmed today, each pointing at its original source note. Later runs are incremental only.
 
 **Concurrent writes**: re-read `CURRENT.md` immediately before writing and merge this session's changes into what was just read — no locks. A git merge across branches may conflict on `CURRENT.md` like any shared text file: keep both sides' additions and the newer supersede; when in doubt, the bootstrap pass is the recovery path. Invariant that makes every failure recoverable: the notes are the system of record, `CURRENT.md` is a rebuildable projection.
 
-When the run changed the state file (including a bootstrap), the closing reply lists the changes — one line each: added, superseded, deleted (bootstrap: the entry count).
+The closing reply is the handover receipt, in the resolved language. It always names: the note path, the metadata chain it wrote (author, branch, commit sha, the note it continues — omitting any field the note omits), and the state-file outcome — when `CURRENT.md` changed, the changes one line each: added, superseded, deleted; a bootstrap is all adds: lead with the entry count, then list every entry the same way. Backfilling the projection silently fails the visibility contract.
 
 ## Process
 

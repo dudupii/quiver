@@ -2,7 +2,7 @@
 type: regex
 target: trace
 match: contains
-pattern: "(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*stub-bin/claude(?:[^\"\\\\]|\\\\.)*--bg)(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*stub-bin/claude(?:[^\"\\\\]|\\\\.)*--name(?:[^\"\\\\]|\\\\.)*(?:toggle|contrast|regression))(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*stub-bin/claude(?:[^\"\\\\]|\\\\.)*\\.handovers/2026-01-02_0500\\.md)(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*catchup)"
+pattern: "^(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*stub-bin/claude(?:[^\"\\\\]|\\\\.)*--bg)(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*stub-bin/claude(?:[^\"\\\\]|\\\\.)*--name(?:[^\"\\\\]|\\\\.)*(?:toggle|contrast|regression))(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*stub-bin/claude(?:[^\"\\\\]|\\\\.)*\\.handovers/2026-01-02_0500\\.md)(?=[\\s\\S]*\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*catchup)"
 ---
 
 Every seed element rides inside the actual Bash `command` value, not in
