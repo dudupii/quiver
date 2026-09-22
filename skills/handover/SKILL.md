@@ -95,6 +95,8 @@ Flat list, no sections, no frontmatter. The fact text is written in the run's re
 
 When the run changed the state file (including a bootstrap), the closing reply lists the changes — one line each: added, superseded, deleted (bootstrap: the entry count).
 
+The closing reply always confirms the handoff itself in the resolved language, as a receipt: the note path plus the metadata chain it wrote — author, branch, commit sha, and the note it continues — omitting any field whose lookup failed.
+
 ## Process
 
 1. Review what this session did, weighing each thread against the focus (if any) to decide its depth.
