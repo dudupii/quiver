@@ -11,6 +11,12 @@ what the automated eval suite cannot see (per-agent install surfaces).
    supersede-in-place); without the grant the harness strips the tool and
    `handover-state-update` scores ~0.71 with "not granted: Edit". `--scaffold`
    runs our own seed scripts as you; never pass it for third-party case files.
+   Currently 27 cases, ~1 h serial. Wrap invocations in `timeout -k 15 720` —
+   a wedged grade pass spins at full CPU and ignores SIGTERM. Every case dir
+   needs `case.yaml` + a seed script (a dir without one hangs the loader), and
+   trace-target lookahead chains must start with `^` (unanchored, they go
+   quadratic over multi-MB traces). Both wedge classes were fixed 2026-09-22;
+   the signatures stay here for recognition.
 3. **Codex**: `codex plugin marketplace add dudupii/quiver` (or a local
    clone path) → `codex plugin add quiver@quiver` → in a scratch repo run a
    handover and a catchup; confirm `quiver:handover` and `quiver:relay` are

@@ -11,7 +11,7 @@ One source of skills, thin per-agent adapters: every agent gets the same arrows 
 | Skill | What it does |
 |---|---|
 | **brainstorm** | Turns a rough idea into an agreed design *before* any implementation. Auto-triggers at the start of creative work. |
-| **handover** | Multilingual session handover notes (en / ja / zh) with language memory — decisions, discarded options, gotchas, next steps, suggested skills. |
+| **handover** | Multilingual session handover notes (en / ja / zh) with language memory — decisions, discarded options, gotchas, next steps, suggested skills — plus `CURRENT.md`, a one-line-per-fact current-state file that stays fresh as the notes accumulate. |
 | **catchup** | Reads the latest handover notes (plus the commits since the last one) and briefs you in four sections. Strictly read-only, safe to auto-trigger. |
 | **relay** | Hands the latest handover note to a fresh background agent that picks up the work unattended — pointer seed, descriptive name, echoed command. User-requested only. |
 
@@ -73,7 +73,8 @@ A session-end handover note that a human (or the next session) can pick up.
 - Notes land in `.handovers/YYYY-MM-DD_HHmm.md` (name collisions get `_2`, `_3`, …), each starting with YAML frontmatter: `author` (git `user.name` only — never an email), `branch`, `commit`, `lang`, and `continues:` linking to the previous note. Fields are silently omitted where unavailable; notes from before this convention still work
 - **User-requested only**: handover never fires on its own — a session merely ending is not a trigger; you (or the next session's human) have to ask for it
 - **Legacy path**: notes written before v0.4.0 live in `.claude/handovers/` — they are still read (for `continues`, catchup, and the language memory) but never rewritten; new notes always go to `.handovers/`
-- **Current-state file**: alongside the note, handover maintains `.handovers/CURRENT.md` — one line per durable fact, latest state only, with its confirmation date and source note; entries the session didn't touch are never edited, and a first run in a repo with notes backfills it from the full history
+- **Current-state file**: alongside the note, handover maintains `.handovers/CURRENT.md` — one line per durable fact, latest state only, with its confirmation date and source note. Each run applies only what the session learned: newly durable facts are added, entries whose truth changed are superseded in place (the entry then states the new fact only — the old value lives in git and the source note), refuted ones are deleted, and entries the session didn't touch are never rewritten. A first run in a repo with notes but no `CURRENT.md` bootstraps it from the full history, oldest notes first, so facts buried by age are not crowded out by recent ones
+- **Closing receipt**: handover's closing reply doubles as a receipt — the note path, the metadata chain it wrote (deferring to the note's own frontmatter rules), and the `CURRENT.md` outcome, changes one line each; a bootstrap leads with the entry count and lists every added entry. Nothing lands silently
 - **Git-aware, git-read-only**: when the handover directory is tracked in git, handover closes with a one-line suggestion to commit the note so teammates see it; when it's ignored or untracked, it says nothing about git. It never runs a state-changing git command
 
 ## Arrow: catchup
