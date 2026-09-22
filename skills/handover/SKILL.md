@@ -93,9 +93,7 @@ Flat list, no sections, no frontmatter. The fact text is written in the run's re
 
 **Concurrent writes**: re-read `CURRENT.md` immediately before writing and merge this session's changes into what was just read — no locks. A git merge across branches may conflict on `CURRENT.md` like any shared text file: keep both sides' additions and the newer supersede; when in doubt, the bootstrap pass is the recovery path. Invariant that makes every failure recoverable: the notes are the system of record, `CURRENT.md` is a rebuildable projection.
 
-When the run changed the state file (including a bootstrap), the closing reply lists the changes — one line each: added, superseded, deleted (bootstrap: the entry count).
-
-The closing reply always confirms the handoff itself in the resolved language, as a receipt: the note path plus the metadata chain it wrote — author, branch, commit sha, and the note it continues — omitting any field whose lookup failed.
+The closing reply is the handover receipt, in the resolved language. It always names: the note path, the metadata chain it wrote (author, branch, commit sha, the note it continues — omitting fields whose lookup failed), and the state-file outcome — when `CURRENT.md` changed, the changes one line each: added, superseded, deleted; on a bootstrap, the entry count and one example fact rescued from the old notes. Backfilling the projection silently fails the visibility contract.
 
 ## Process
 
