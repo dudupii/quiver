@@ -2,7 +2,7 @@
 type: regex
 target: trace
 match: contains
-pattern: "(?:\"name\"\\s*:\\s*\"(?:Write|Edit|NotebookEdit)\"\\s*,\\s*\"input\"\\s*:\\s*\\{\\s*\"(?:file_path|notebook_path)\"\\s*:\\s*\"[^\"]*\\.handovers/CURRENT\\.md(?![\\w.-])|\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*(?:\\bsed\\s+-i(?:[^\"\\\\]|\\\\.)*|\\brm\\s+(?:[^\"\\\\]|\\\\.)*|>{1,2}(?:[^\"\\\\]|\\\\.)*)\\.handovers/CURRENT\\.md(?![\\w.-]))"
+pattern: "(?:\"name\"\\s*:\\s*\"(?:Write|Edit|NotebookEdit)\"\\s*,\\s*\"input\"\\s*:\\s*\\{\\s*\"(?:file_path|notebook_path)\"\\s*:\\s*\"[^\"]*\\.handovers/CURRENT\\.md(?![\\w.-])|\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.)*(?:\\bsed\\s+-i(?:[^\"\\\\]|\\\\.)*|\\brm\\s+(?:[^\"\\\\]|\\\\.)*|>{1,2}\\s*[\"']?(?:[^\"\\\\\\s;&|]|\\\\.)*)\\.handovers/CURRENT\\.md(?![\\w.-]))"
 ---
 
 The state file is modified through a write tool — Write (full rewrite) or
