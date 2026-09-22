@@ -1,10 +1,14 @@
 ---
 type: regex
-target: files
-match: count:0
-pattern: "CURRENT\\.md"
+target: trace
+match: not_contains
+pattern: "\"name\"\\s*:\\s*\"(?:Write|Edit|NotebookEdit)\"\\s*,\\s*\"input\"\\s*:\\s*\\{\\s*\"(?:file_path|notebook_path)\"\\s*:\\s*\"[^\"]*\\.handovers/CURRENT\\.md"
 ---
 
 Zero writes to the state file: nothing durable came out of the session, so
-the contract demands no churn — no invented entries, no refreshed dates
-(assumes the `files` target lists created and modified files).
+CURRENT.md must not be touched by any write tool. Reading it is fine (the
+skill's contract asks the agent to check) — the pattern anchors on a
+Write/Edit/NotebookEdit tool_use whose `file_path` names CURRENT.md, so a
+Read never trips it. (Was `target: files` + `count:0`, which was vacuous:
+that target lists only files the run *creates*, so an edit to the seeded
+CURRENT.md was invisible to it.)
