@@ -6,9 +6,11 @@ what the automated eval suite cannot see (per-agent install surfaces).
 1. **Manifests green**: `npm run check` (JSON validity, version alignment,
    name=directory conformance).
 2. **Eval suite**: `CLAUDE_CODE_WALNUT_SPIRE=1 claude plugin eval . --scaffold
-   --ablation none --allow-tools Bash Write` — all cases green or accounted
-   for. `--scaffold` runs our own seed scripts as you; never pass it for
-   third-party case files.
+   --ablation none --allow-tools Bash Write Edit` — all cases green or accounted
+   for. `Edit` is required since the state-projection cases (CURRENT.md
+   supersede-in-place); without the grant the harness strips the tool and
+   `handover-state-update` scores ~0.71 with "not granted: Edit". `--scaffold`
+   runs our own seed scripts as you; never pass it for third-party case files.
 3. **Codex**: `codex plugin marketplace add dudupii/quiver` (or a local
    clone path) → `codex plugin add quiver@quiver` → in a scratch repo run a
    handover and a catchup; confirm `quiver:handover` and `quiver:relay` are

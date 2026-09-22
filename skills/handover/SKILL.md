@@ -74,7 +74,7 @@ Notes are the **event log** and the system of record; `CURRENT.md` is the **stat
 - <fact, one telegraphic line> (confirmed YYYY-MM-DD | source: <note filename>)
 ```
 
-Flat list, no sections, no frontmatter. The fact text is written in the run's resolved language, stays on one line, and contains no `|` pipe — the pipe separates the fields; the `confirmed`/`source` markers stay in English so every line stays greppable. Superseding replaces the line in place (new value, new date, new source); refuting deletes it; the old value survives in git history and in the source note.
+Flat list, no sections, no frontmatter. The fact text is written in the run's resolved language, stays on one line, and contains no `|` pipe — the pipe separates the fields; the `confirmed`/`source` markers stay in English so every line stays greppable. Superseding replaces the line in place (new value, new date, new source), and the entry then states the new fact **only** — the old value leaves the file entirely, not even as a trailing "formerly …" or "… is decommissioned" clause; that history lives in git and in the source note. Refuting deletes it.
 
 **Durable vs temporal** — the judgment the projection asks for:
 
