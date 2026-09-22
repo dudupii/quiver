@@ -2,7 +2,7 @@
 type: regex
 target: trace
 match: contains
-pattern: "(?=[\\s\\S]*OMNI-8)(?=[\\s\\S]*What was done)(?=[\\s\\S]*Decisions)(?=[\\s\\S]*Discarded options and why)(?=[\\s\\S]*Gotchas)(?=[\\s\\S]*Learnings)(?=[\\s\\S]*Next steps)(?=[\\s\\S]*Suggested skills)(?=[\\s\\S]*Related files)"
+pattern: "^(?=[\\s\\S]*OMNI-8)(?=[\\s\\S]*What was done)(?=[\\s\\S]*Decisions)(?=[\\s\\S]*Discarded options and why)(?=[\\s\\S]*Gotchas)(?=[\\s\\S]*Learnings)(?=[\\s\\S]*Next steps)(?=[\\s\\S]*Suggested skills)(?=[\\s\\S]*Related files)"
 ---
 
 Emphasis, not selection: with a focus-only argument the note — written
