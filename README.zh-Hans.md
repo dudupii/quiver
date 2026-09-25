@@ -1,10 +1,22 @@
 # quiver
 
-一箭一技。🏹
+> 一箭一技。🏹
+> **小巧、锋利、独立——每个 agent,同一套箭。**
+
+[![check](https://img.shields.io/github/actions/workflow/status/dudupii/quiver/check.yml?branch=main&label=check)](https://github.com/dudupii/quiver/actions/workflows/check.yml)
+[![version](https://img.shields.io/github/v/release/dudupii/quiver?color=blue)](https://github.com/dudupii/quiver/releases)
+[![license](https://img.shields.io/github/license/dudupii/quiver?color=green)](./LICENSE)
+[![stars](https://img.shields.io/github/stars/dudupii/quiver?style=social)](https://github.com/dudupii/quiver/stargazers)
+
+[English](README.md) · [简体中文](README.zh-Hans.md)
+
+<p align="center"><img src="docs/quiver-loop.zh.svg" alt="handover 闭环:handover 写笔记,relay 点火后台 agent,agent 干活并可再交接,catchup 给下个会话做简报——一个共享的 .handovers/ 目录,任何 agent 通用。" width="640"></p>
 
 一个持续扩充的 AI 编码 agent 技能箭袋——支持 [Claude Code](https://claude.com/claude-code)、[Codex](https://developers.openai.com/codex/)、[pi](https://pi.dev/)、[PrimeAgent](https://github.com/PrimeIntellect-ai/prime-agent)(以及一切兼容 pi 包格式的 agent)。每支箭都小巧、锋利、独立——需要哪支拔哪支。
 
 单一技能源 + 各 agent 薄适配:所有 agent 从同一个仓库获得同一套箭。
+
+多数技能包交付的是一套框架——会话钩子、分阶段工作流、给每件事都裹一层流程。quiver 反其道而行:一支箭就是一份 SKILL.md——至多几 KB,没有钩子,也不依赖 agent 自带机制之外的任何东西。常驻开销只有几十 token 的技能列表;其余一切,等你开弓才发生。
 
 ## 箭囊
 

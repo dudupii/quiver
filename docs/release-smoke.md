@@ -37,5 +37,9 @@ what the automated eval suite cannot see (per-agent install surfaces).
    plugin update quiver`, restart, `/handover` + `/catchup` + `/relay` once
    (relay needs the note `/handover` just wrote — check the background job
    list shows the descriptive name).
-6. **Tag**: `git tag v<version>` and push the tag — README pi pins point at
+6. **README surface**: badge URLs resolve (check workflow green, latest
+   release linked), the language switcher links match files on disk, both
+   loop SVGs (`docs/quiver-loop*.svg`) render on the repo homepage, and the
+   pi pin examples equal the version being tagged.
+7. **Tag**: `git tag v<version>` and push the tag — README pi pins point at
    tags; an untagged pin is a dangling reference.

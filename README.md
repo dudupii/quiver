@@ -1,10 +1,22 @@
 # quiver
 
-One arrow, one skill. 🏹
+> One arrow, one skill. 🏹
+> **Small, sharp, independent — and the same arrows on every agent.**
+
+[![check](https://img.shields.io/github/actions/workflow/status/dudupii/quiver/check.yml?branch=main&label=check)](https://github.com/dudupii/quiver/actions/workflows/check.yml)
+[![version](https://img.shields.io/github/v/release/dudupii/quiver?color=blue)](https://github.com/dudupii/quiver/releases)
+[![license](https://img.shields.io/github/license/dudupii/quiver?color=green)](./LICENSE)
+[![stars](https://img.shields.io/github/stars/dudupii/quiver?style=social)](https://github.com/dudupii/quiver/stargazers)
+
+[English](README.md) · [简体中文](README.zh-Hans.md)
+
+<p align="center"><img src="docs/quiver-loop.svg" alt="The handover loop: handover writes the note, relay ignites a background agent, the agent works and may hand over again, catchup briefs the next session — one shared .handovers/ directory, any agent." width="640"></p>
 
 A growing quiver of skills for AI coding agents — [Claude Code](https://claude.com/claude-code), [Codex](https://developers.openai.com/codex/), [pi](https://pi.dev/), and [PrimeAgent](https://github.com/PrimeIntellect-ai/prime-agent) (pi-compatible agents generally). Small, sharp, and independent — grab only what you need.
 
 One source of skills, thin per-agent adapters: every agent gets the same arrows from this one repo.
+
+Most skill packs ship a framework — session hooks, staged workflows, a process wrapped around every task. quiver inverts that: an arrow is a single SKILL.md — a couple of KB at most, no hooks, no harness beyond what your agent already has. The only standing cost is a few dozen tokens of skill listing; everything else waits until you fire.
 
 ## Arrows
 
