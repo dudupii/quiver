@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 348" role="img" aria-label="引き継ぎのループ">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+    </marker>
+  </defs>
+  <g font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, 'Noto Sans CJK JP', sans-serif" text-anchor="middle">
+    <path d="M 470 52 Q 590 62 636 138" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#a)"/>
+    <path d="M 650 202 Q 600 285 478 289" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#a)"/>
+    <path d="M 310 292 Q 180 285 144 206" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#a)"/>
+    <path d="M 130 142 Q 82 62 300 54" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#a)"/>
+
+    <rect x="290" y="138" width="200" height="70" rx="10" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-dasharray="5 4"/>
+    <text x="390" y="168" font-size="15" font-weight="600" fill="#8b949e">.handovers/</text>
+    <text x="390" y="188" font-size="11" fill="#8b949e">ノート · CURRENT.md —— git 管理</text>
+
+    <rect x="310" y="24" width="160" height="56" rx="10" fill="none" stroke="#1f6feb" stroke-width="1.6"/>
+    <text x="390" y="47" font-size="16" font-weight="600" fill="#1f6feb">handover</text>
+    <text x="390" y="66" font-size="11" fill="#8b949e">ノート + CURRENT.md を書く</text>
+
+    <rect x="570" y="144" width="160" height="56" rx="10" fill="none" stroke="#8250df" stroke-width="1.6"/>
+    <text x="650" y="167" font-size="16" font-weight="600" fill="#8250df">relay</text>
+    <text x="650" y="186" font-size="11" fill="#8b949e">バックグラウンド点火</text>
+
+    <rect x="310" y="264" width="160" height="56" rx="10" fill="none" stroke="#d29922" stroke-width="1.6"/>
+    <text x="390" y="287" font-size="16" font-weight="600" fill="#d29922">agent</text>
+    <text x="390" y="306" font-size="11" fill="#8b949e">無人で作業・再引き継ぎ</text>
+
+    <rect x="50" y="144" width="160" height="56" rx="10" fill="none" stroke="#2da44e" stroke-width="1.6"/>
+    <text x="130" y="167" font-size="16" font-weight="600" fill="#2da44e">catchup</text>
+    <text x="130" y="186" font-size="11" fill="#8b949e">次セッションにサマリー</text>
+
+    <text x="390" y="338" font-size="11" fill="#8b949e">共有ディレクトリ 1 つ、どの agent でも——handover が書き、relay が点火、agent が作業、catchup が読み戻す</text>
+  </g>
+</svg>

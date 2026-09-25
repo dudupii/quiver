@@ -8,7 +8,7 @@
 [![license](https://img.shields.io/github/license/dudupii/quiver?color=green)](./LICENSE)
 [![stars](https://img.shields.io/github/stars/dudupii/quiver?style=social)](https://github.com/dudupii/quiver/stargazers)
 
-[English](README.md) · [简体中文](README.zh-Hans.md)
+[English](README.md) · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md) · [日本語](README.ja.md)
 
 <p align="center"><img src="docs/quiver-loop.svg" alt="The handover loop: handover writes the note, relay ignites a background agent, the agent works and may hand over again, catchup briefs the next session — one shared .handovers/ directory, any agent." width="640"></p>
 

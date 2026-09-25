@@ -8,7 +8,7 @@
 [![license](https://img.shields.io/github/license/dudupii/quiver?color=green)](./LICENSE)
 [![stars](https://img.shields.io/github/stars/dudupii/quiver?style=social)](https://github.com/dudupii/quiver/stargazers)
 
-[English](README.md) · [简体中文](README.zh-Hans.md)
+[English](README.md) · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md) · [日本語](README.ja.md)
 
 <p align="center"><img src="docs/quiver-loop.zh.svg" alt="handover 闭环:handover 写笔记,relay 点火后台 agent,agent 干活并可再交接,catchup 给下个会话做简报——一个共享的 .handovers/ 目录,任何 agent 通用。" width="640"></p>
 
