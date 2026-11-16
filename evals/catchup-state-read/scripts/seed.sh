@@ -11,6 +11,9 @@
 #                       edge) and NOT same-date — must stay out of the brief
 #   2026-04-18_1600.md  same-date sibling (author Alfa) — KILO-6
 #   2026-04-18_1930.md  newest, same date (author Bravo) — LIMA-7
+#   CURRENT.archive.md  two demoted facts (ARCHIVE-POOL-ONE/TWO) that exist
+#                nowhere else — the DEFAULT brief must point at the archive
+#                (count + how to read it), never haul its contents in
 # .lang holds zh so the brief language is deterministic.
 set -euo pipefail
 
@@ -197,4 +200,9 @@ EOF
 cat > .handovers/CURRENT.md <<'EOF'
 - NOVEMBER-9: sandbox needs bubblewrap and kernel.apparmor_restrict_unprivileged_userns=0 (confirmed 2026-03-01 | source: 2026-02-10_0900.md)
 - Package installs must use the mirror at https://mirror.example.com (confirmed 2026-03-05 | source: 2026-03-05_1400.md)
+EOF
+
+cat > .handovers/CURRENT.archive.md <<'EOF'
+- ARCHIVE-POOL-ONE: staging ran its database on port 5433, not the default 5432 (confirmed 2026-05-14 | source: 2026-03-05_1400.md)
+- ARCHIVE-POOL-TWO: docs builds required LC_ALL=C or the generator segfaulted (confirmed 2026-05-14 | source: 2026-03-05_1400.md)
 EOF

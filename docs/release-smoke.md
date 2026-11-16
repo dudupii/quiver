@@ -11,8 +11,18 @@ what the automated eval suite cannot see (per-agent install surfaces).
    supersede-in-place); without the grant the harness strips the tool and
    `handover-state-update` scores ~0.71 with "not granted: Edit". `--scaffold`
    runs our own seed scripts as you; never pass it for third-party case files.
-   Currently 27 cases, ~1 h serial. Wrap invocations in `timeout -k 15 720` —
-   a wedged grade pass spins at full CPU and ignores SIGTERM. Every case dir
+   Currently 30 cases, ~2.5–3 h serial. Leash every invocation: `timeout -k
+   15 720` per single case — a wedged grade pass spins at full CPU and
+   ignores SIGTERM; `timeout -k 15 2400` when running `handover-state-archive`
+   alone (its 65-entry rewrite runs long, and the case sets
+   `timeout_seconds: 480` in its prompt frontmatter to clear the harness's
+   300 s per-run default); `timeout -k 15 12600` for a full-suite run.
+   Date-bound seeds: handover seeds pin absolute dates, and the 90-day age
+   backstop makes any "fresh" seed entry rot ~90 days after its pinned
+   date — when a state case starts failing with everything-archived
+   symptoms, refresh its seed dates (handover-state-update's seed header
+   documents the fresh-vs-stale convention).
+   Every case dir
    needs `case.yaml` + a seed script (a dir without one hangs the loader), and
    trace-target lookahead chains must start with `^` (unanchored, they go
    quadratic over multi-MB traces). Both wedge classes were fixed 2026-09-22;
@@ -34,9 +44,9 @@ what the automated eval suite cannot see (per-agent install surfaces).
    when a binary is at hand: `/relay` should spawn via the built-in
    subagent mechanism and show up in `prime-agent agents`.
 5. **Claude Code**: `claude plugin marketplace update quiver && claude
-   plugin update quiver`, restart, `/handover` + `/catchup` + `/relay` once
-   (relay needs the note `/handover` just wrote — check the background job
-   list shows the descriptive name).
+   plugin update quiver`, restart, `/handover` + `/catchup` + `/catchup deep`
+   + `/relay` once (relay needs the note `/handover` just wrote — check the
+   background job list shows the descriptive name).
 6. **README surface**: badge URLs resolve (check workflow green, latest
    release linked), the language switcher links match files on disk, all
    four loop SVGs (`docs/quiver-loop*.svg`) render on the repo homepage,

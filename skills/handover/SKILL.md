@@ -11,7 +11,7 @@ Generate a handover note for this session's work, in the resolved language, weig
 
 ## Note locations: read old, write new
 
-Notes live in `.handovers/` at the project root. The legacy `.claude/handovers/` (pre-0.4.0) is still **read** — for prior notes and the language memory — but never written. Never move, rename, or delete a legacy note; migration is the user's business. The directory also holds the current-state file `CURRENT.md` (below); it and `.lang` are not notes.
+Notes live in `.handovers/` at the project root. The legacy `.claude/handovers/` (pre-0.4.0) is still **read** — for prior notes and the language memory — but never written. Never move, rename, or delete a legacy note; migration is the user's business. The directory also holds the current-state file `CURRENT.md` and its archive `CURRENT.archive.md` (below); they and `.lang` are not notes.
 
 ## Argument parsing
 
@@ -74,7 +74,7 @@ Notes are the **event log** and the system of record; `CURRENT.md` is the **stat
 - <fact, one telegraphic line> (confirmed YYYY-MM-DD | source: <note filename>)
 ```
 
-Flat list, no sections, no frontmatter. The fact text is written in the run's resolved language, stays on one line, and contains no `|` pipe — the pipe separates the fields; the `confirmed`/`source` markers stay in English so every line stays greppable. Superseding replaces the line in place (new value, new date, new source), and the entry then states the new fact **only** — the old value leaves the file entirely, not even as a trailing "formerly …" or "… is decommissioned" clause; that history lives in git and in the source note. Refuting deletes it.
+Flat list, no sections, no frontmatter. The fact text is written in the run's resolved language, stays on one line, and contains no `|` pipe — the pipe separates the fields; the `confirmed`/`source` markers stay in English so every line stays greppable. Superseding replaces the line in place (new value, new date, new source), and the entry then states the new fact **only** — the old value leaves the file entirely, not even as a trailing "formerly …" or "… is decommissioned" clause; that history lives in git and in the source note. Refuting deletes it. Archiving moves the line verbatim to `CURRENT.archive.md` (see **Aging**).
 
 **Durable vs temporal** — the judgment the projection asks for:
 
@@ -84,16 +84,25 @@ Flat list, no sections, no frontmatter. The fact text is written in the run's re
 **The update contract** — hard rules:
 
 1. Add facts that became durable this session.
-2. Supersede entries whose truth this session changed.
+2. Supersede entries whose truth this session changed — superseding means the truth moved and the new fact still stands. Superseding never archives: an entry whose thread merely **completed** (shipped and closed, nothing left to do, the outcome no longer constrains future work) is **archived**, not superseded.
 3. Delete entries this session refuted.
-4. **Untouched entries are never edited and their `confirmed` dates never refreshed** — a date may only change when the fact itself was re-confirmed. Dates must not lie.
-5. Zero writes when the session produced nothing durable — never invent entries for the sake of writing.
+4. Archive entries per **Aging** below — a mechanical move of the line, fact text and `confirmed` date verbatim, from `CURRENT.md` to the end of `CURRENT.archive.md`.
+5. **Untouched entries are never edited and their `confirmed` dates never refreshed** — a date may only change when the fact itself was re-confirmed. Dates must not lie. Archiving is the one sanctioned move: relocation to the archive is not an edit.
+6. Zero writes when the session produced nothing durable — never invent entries for the sake of writing. Aging is maintenance of the projection, not entry invention; the zero-writes rule never blocks it.
 
-**Bootstrap**: when notes exist but `CURRENT.md` does not (first run after the upgrade, or a repo that never adopted it), perform a one-time full pass over every note in both directories — oldest first, so facts buried by age are not crowded out — distill the durable facts into entries confirmed today, each pointing at its original source note. Later runs are incremental only.
+**Aging** — `CURRENT.md` is a bounded working set, not an ever-growing ledger. Three tiers, run in this order: editorial and age demotions happen **before** the session's incremental write; the size cap runs **after**, as the final mechanical step on the written result — so the next session's read never exceeds the cap.
 
-**Concurrent writes**: re-read `CURRENT.md` immediately before writing and merge this session's changes into what was just read — no locks. A git merge across branches may conflict on `CURRENT.md` like any shared text file: keep both sides' additions and the newer supersede; when in doubt, the bootstrap pass is the recovery path. Invariant that makes every failure recoverable: the notes are the system of record, `CURRENT.md` is a rebuildable projection.
+1. **Editorial** — the judgment tier. Archive an entry when its thread has shipped or closed, or when the fact no longer informs next actions or active constraints (the completed-thread case in the update contract). Runs at the handover that notices, never on a timer.
+2. **Age backstop** — any entry whose `confirmed` date is more than **90 days** old and was not re-confirmed this session moves to the archive. "Kept while relevant" holds against age alone: when this session actually re-confirmed the fact, supersede with today's date instead.
+3. **Size cap** — if the written `CURRENT.md` still holds more than **60 entries**, evict oldest-`confirmed` first until it holds 60, appending each verbatim to the archive. Blind to relevance — "kept while relevant" never holds against size. Running last, it can never evict an entry added this session.
 
-The closing reply is the handover receipt, in the resolved language. It always names: the note path, the metadata chain it wrote (author, branch, commit sha, the note it continues — omitting any field the note omits), and the state-file outcome — when `CURRENT.md` changed, the changes one line each: added, superseded, deleted; a bootstrap is all adds: lead with the entry count, then list every entry the same way. Backfilling the projection silently fails the visibility contract.
+The archive, `CURRENT.archive.md`, is a flat pure-append log in the same one-line format: never reordered, never edited, never pruned. Entries move in verbatim — fact text, `confirmed` date, and `source` unchanged. Demotion loses nothing: the notes stay untouched and the archive is one explicit read away (`/catchup deep`).
+
+**Bootstrap**: when notes exist but `CURRENT.md` does not (first run after the upgrade, or a repo that never adopted it), perform a one-time full pass over every note in both directories — oldest first, so facts buried by age are not crowded out — distill the durable facts into entries, each pointing at its original source note and `confirmed` at **that note's date** (the pass projects, it does not re-confirm). Then run Aging once on the result, so day one already shows the steady-state split: a small working set plus a populated archive. Later runs are incremental only.
+
+**Concurrent writes**: re-read `CURRENT.md` immediately before writing and merge this session's changes into what was just read — no locks. Same-day parallel sessions appending to `CURRENT.archive.md` merge trivially — pure append, both sides' lines kept, order irrelevant. A git merge across branches may conflict on `CURRENT.md` like any shared text file: keep both sides' additions and the newer supersede; when in doubt, the bootstrap pass is the recovery path. Invariant that makes every failure recoverable: the notes are the system of record, `CURRENT.md` and its archive are rebuildable projections.
+
+The closing reply is the handover receipt, in the resolved language. It always names: the note path, the metadata chain it wrote (author, branch, commit sha, the note it continues — omitting any field the note omits), and the state-file outcome — when `CURRENT.md` changed, the changes one line each: added, superseded, deleted, and archived → `CURRENT.archive.md` (cap-moves included); a bootstrap is all adds: lead with the entry count and the working-set/archive split, then list every entry the same way. Backfilling the projection silently fails the visibility contract.
 
 ## Process
 
@@ -101,7 +110,7 @@ The closing reply is the handover receipt, in the resolved language. It always n
 2. Collect note metadata with read-only lookups: `git config user.name`, `git branch --show-current`, `git rev-parse --short HEAD`, and the latest existing note filename across both directories (omit fields whose lookup fails).
 3. Ensure `.handovers/` exists.
 4. Write the note — frontmatter block, then every section — to `.handovers/YYYY-MM-DD_HHmm.md` (e.g. `2026-02-17_1430.md`). On name collision append `_2`, `_3`, …
-5. Maintain `CURRENT.md` per its section — bootstrap when it is absent and notes exist, otherwise the incremental contract (re-read, merge, write).
+5. Maintain `CURRENT.md` per its section — bootstrap when it is absent and notes exist, otherwise: aging first (editorial + age demotions), then the incremental contract (re-read, merge, write), then the size cap on the written result.
 6. Persist the resolved language to `.handovers/.lang` if it was set by argument.
 7. Sharing check (read-only): if `git ls-files .handovers/ .claude/handovers/` lists tracked notes and `git check-ignore -q <note>` reports the new note as not ignored, close with a single line in the resolved language suggesting to commit the note so teammates can see it. If both directories are gitignored or untracked, or this is not a git repository, say nothing about git.
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Seed a git repo with one note and a pre-existing CURRENT.md holding two
-# entries (HOTEL-4, INDIA-5). The session is deliberately durable-fact-free:
-# a screen-share debugging session whose root cause lived in a teammate's
-# local environment. Contract: the note is still written; the state file is
-# not touched at all — no churn entries, no date refreshes.
+# entries (HOTEL-4, INDIA-5), both confirmed 2026-04-10 — over the 90-day
+# backstop at any plausible run date. The session is deliberately
+# durable-fact-free: a screen-share debugging session whose root cause lived
+# in a teammate's local environment. Contract: the note is still written; no
+# entry is invented; and aging still runs — both stale entries move verbatim
+# to CURRENT.archive.md, because the zero-writes rule never blocks it.
 set -euo pipefail
 
 git init -q -b main

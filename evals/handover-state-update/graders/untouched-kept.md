@@ -2,7 +2,7 @@
 type: regex
 target: {source: file, path: .handovers/CURRENT.md}
 match: contains
-pattern: "FOXTROT-2[^\\)]*confirmed 2026-04-10"
+pattern: "FOXTROT-2[^\\)]*confirmed 2026-11-07"
 ---
 
 The untouched canary survives byte-for-byte: the FOXTROT-2 entry keeps its

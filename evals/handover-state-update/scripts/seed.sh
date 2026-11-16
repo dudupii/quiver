@@ -4,7 +4,9 @@
 #   ECHO line    — mirror at mirror.example.com; the session decommissions it
 #                  (must be superseded in place: new value, new date, new source)
 #   FOXTROT-2    — sandbox requirement; untouched canary (line and its ORIGINAL
-#                  confirmed date must survive byte-for-byte)
+#                  confirmed date must survive byte-for-byte). Seeded fresh:
+#                  aging must leave a fresh untouched entry alone — the stale-
+#                  entry move is handover-state-zero's pin.
 #   third line   — release-smoke practice; also untouched
 # .lang holds en so the note language is deterministic.
 set -euo pipefail
@@ -20,7 +22,7 @@ git add -A
 git -c user.name="Commit Bot" -c user.email="commit-bot@example.com" commit -qm "init"
 git commit -q --allow-empty -m "second commit for a nonzero log"
 
-cat > .handovers/2026-04-10_0900.md <<'EOF'
+cat > .handovers/2026-11-07_0900.md <<'EOF'
 ---
 author: Test User
 branch: main
@@ -28,7 +30,7 @@ commit: 0a1b2c3
 lang: en
 ---
 
-# Handover 2026-04-10
+# Handover 2026-11-07
 
 ## What was done
 
@@ -63,16 +65,16 @@ none
 - src/app.py
 EOF
 
-cat > .handovers/2026-05-02_1300.md <<'EOF'
+cat > .handovers/2026-11-08_1300.md <<'EOF'
 ---
 author: Test User
 branch: main
 commit: 1c2d3e4
 lang: en
-continues: 2026-04-10_0900.md
+continues: 2026-11-07_0900.md
 ---
 
-# Handover 2026-05-02
+# Handover 2026-11-08
 
 ## What was done
 
@@ -108,7 +110,7 @@ none
 EOF
 
 cat > .handovers/CURRENT.md <<'EOF'
-- Package installs must use the mirror at https://mirror.example.com (confirmed 2026-04-10 | source: 2026-04-10_0900.md)
-- FOXTROT-2: sandbox needs bubblewrap and kernel.apparmor_restrict_unprivileged_userns=0 (confirmed 2026-04-10 | source: 2026-04-10_0900.md)
-- Release smoke runs the four-platform checklist before tagging (confirmed 2026-05-02 | source: 2026-05-02_1300.md)
+- Package installs must use the mirror at https://mirror.example.com (confirmed 2026-11-07 | source: 2026-11-07_0900.md)
+- FOXTROT-2: sandbox needs bubblewrap and kernel.apparmor_restrict_unprivileged_userns=0 (confirmed 2026-11-07 | source: 2026-11-07_0900.md)
+- Release smoke runs the four-platform checklist before tagging (confirmed 2026-11-08 | source: 2026-11-08_1300.md)
 EOF
