@@ -55,7 +55,7 @@ codex plugin add quiver@quiver
 pi install git:github.com/dudupii/quiver
 ```
 
-`pi install git:github.com/dudupii/quiver@v0.5.0` でリリースをピンできます。
+`pi install git:github.com/dudupii/quiver@v0.6.0` でリリースをピンできます。
 
 **PrimeAgent**(pi 上に構築、同じパッケージ形式)
 
